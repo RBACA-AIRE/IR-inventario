@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Servidores</title>
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+
+    <!-- ===================Stilos ========================================= -->
+</head>
+
+<body>
+    <!-- ===============================Navegacion============================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#" class="icon-link">
+                        <img src="assets/imgs/intercorp-azul.ico" alt="Icono" class="icono">
+                        <span class="title">Intercorp Retail</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"><ion-icon name="business-outline"></ion-icon></span>
+                        <span class="title">Gestión del Negocio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                        <span class="title">Gestión de Usuarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="acceso_remoto.html">
+                        <span class="icon"><ion-icon name="server-outline"></ion-icon></span>
+                        <span class="title">Accesos Remotos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"><ion-icon name="file-tray-full-outline"></ion-icon></span>
+                        <span class="title">Inventario General</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"><ion-icon name="archive-outline"></ion-icon></span>
+                        <span class="title">Base del Conocimiento</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
+                        <span class="title">Cerrar Sesión</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ================================ Main ===============================================-->
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+            <div class="search">
+                <label>
+                    <input type="text" placeholder="Search here">
+                    <ion-icon name="search-outline"></ion-icon>
+
+                </label>
+            </div>
+            <div class="user">
+                <img src="assets/imgs/customer01.jpg" alt="">
+            </div>
+        </div>
+        <!-- ==================================Card ========================== -->
+        <div class="cardBox">
+            <div class="card">
+                <div>
+                    <div class="numbers">1,600</div>
+                    <div class="cardName">Acceso Remoto</div>
+                </div>
+                <div class="iconBx">
+                    <ion-icon name="server-outline"></ion-icon>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="numbers">80</div>
+                    <div class="cardName">Inventario General</div>
+                </div>
+                <div class="iconBx">
+                    <ion-icon name="file-tray-full-outline"></ion-icon>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="numbers">1,50</div>
+                    <div class="cardName">Daily Views</div>
+                </div>
+                <div class="iconBx">
+                    <ion-icon name="cloud-upload-outline"></ion-icon>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="numbers">1,5048</div>
+                    <div class="cardName">Daily Views</div>
+                </div>
+                <div class="iconBx">
+                    <ion-icon name="file-tray-full-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+
+       <!-- ============================ lista de detalles del pedido ===================== -->
+        <div class="details">
+            <div class="recentOrders">
+                <div class="cardHeader">
+                    <h2>Visto Reciente</h2>
+                    <a href="#" class="btn">Mostrar Todo</a>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Precio</td>
+                            <td>Metodo de pago</td>
+                            <td>Stado</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Refrigerador iniciado</td>
+                            <td>$1200</td>
+                            <td>paid</td>
+                            <td><span class="status delivered">Delivery</span></td>
+                        </tr>
+                        <tr>
+                            <td>Dell Laptop</td>
+                            <td>$1200</td>
+                            <td>paid</td>
+                            <td><span class="status pending">pendiente</span></td>
+                        </tr>
+                        <tr>
+                            <td>Monitor</td>
+                            <td>$1200</td>
+                            <td>paid</td>
+                            <td><span class="status return">Delivery</span></td>
+                        </tr>
+                        <tr>
+                            <td>Televisor</td>
+                            <td>$1200</td>
+                            <td>paid</td>
+                            <td><span class="status InProgress">En Progreso</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- ========================= New Usuarios ============================== -->
+             <div class="recentUsers">
+                <div class="cardHeader">
+                    <h2>Nuevos Usuarios</h2>
+                    <a href="#" class="btn">Mostrar Todo</a>
+                </div>
+                <table>
+                    <tr>
+                        <td width="60px">
+                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
+                        </td>
+                        <td>
+                            <h4>David <br> <spam>Italy</spam></h4>
+                        </td>
+                    </tr>
+                </table>
+             </div>
+        </div>
+    </div>
+ </div>
+
+    <!-- ==================== Scripts ========================= -->
+    <script src="assets/js/main.js"></script>
+
+    <!--==================== ionicons ============= -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+
+</html>
