@@ -9,13 +9,20 @@ import {
   updateServidor
 } from '../controllers/servidores.controllers.js';
 
-import { loginUsuario } from '../controllers/auth.controller.js';  // Asegúrate de que este archivo existe
+import { loginUsuario, registerUsuario, obtenerRoles, obtenerListadoUsuarios, obtenerListadoAreas, obtenerListadoCargos } from '../controllers/auth.controller.js';  // Asegúrate de que este archivo exista
 
 const router = Router();
 
 // Ruta para login
-// Asegúrate de que la ruta esté definida correctamente y que `loginUsuario` exista en el archivo `auth.controller.js`
 router.post('/login', loginUsuario); // Aquí se hace el login
+
+// Ruta para obtener los roles
+router.get('/api/roles', obtenerRoles);
+router.get('/api/areas', obtenerListadoAreas);
+router.get('/api/cargos', obtenerListadoCargos);  //obtener roles
+router.get('/api/usuario', obtenerListadoUsuarios);  // Listar usuarios
+
+router.post('/api/usuario', registerUsuario); // <- Nueva ruta de registro
 
 // Rutas para la gestión de servidores
 router.get('/servidores', getServidores);          // Obtener todos los servidores
@@ -25,4 +32,5 @@ router.put('/servidores/:id', updateServidor);   // Actualizar un servidor
 router.delete('/servidores/:id', deleteServidor); // Eliminar un servidor
 
 export default router;
+
 
