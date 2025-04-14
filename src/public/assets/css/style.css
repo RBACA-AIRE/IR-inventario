@@ -431,3 +431,15 @@ a img {
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
 }
+
+/* ====================================== Centrar datos de mi tabla ======================*/
+/* Centrar texto en las celdas de la tabla */
+#myTable th, #myTable td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Opcional: para centrar el contenido de la tabla de forma general */
+#myTable {
+    margin: 0 auto;
+}
