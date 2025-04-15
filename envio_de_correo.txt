@@ -1,0 +1,149 @@
+Te propongo un flujo más seguro y profesional:
+===========================================
+Se registra al usuario sin contraseña inicial o con una contraseña temporal aleatoria .o con una contraseña temporal aleatoria.
+
+Se genera un token único de activación con vencimiento ( JWT o(JWT o UUID con tiempo de vencimiento).
+
+Se envía un correo con un enlace único para que el usuario establezca su contraseña .para que el usuario establezca su contraseña.
+
+El enlace lleva a un punto final enen tu backend que valida el token y permite definir una nueva contraseña.
+
+Al establecer la nueva contraseña, se guarda encriptada .
+
+¿Cómo lo hacemos?
+📦 Requisitos:
+Ya tienes jsonwebtoken y nodemailer , seguimos usando esos.
+
+Una nueva tabla para tokens opcionales (para invalidarlos anticipadamente si quieres), o manejarlo con JWT firmado.
+
+1. Enviar enlace de activación
+==========================================
+En lugar de mandar la contraseña, generamos:
+const activationToken = jwt.sign(
+  { correo: correo },
+  process.env.JWT_SECRET,
+  { expiresIn: "1h" } // válido por 1 hora
+);
+
+Y en el correo:
+===================
+const activationLink = `${process.env.FRONTEND_URL}/activar-cuenta?token=${activationToken}`;
+
+Y el contenido:
+====================
+html: `
+  <h3>Hola ${nombre},</h3>
+  <p>Bienvenido al sistema de inventario.</p>
+  <p>Para activar tu cuenta y establecer tu contraseña, haz clic en el siguiente enlace:</p>
+  <p><a href="${activationLink}">Activar mi cuenta</a></p>
+  <p>Este enlace expirará en 1 hora.</p>
+  <p>Saludos,<br>Equipo de Soporte</p>
+`,
+
+2. Punto final para activar la cuenta y definir contraseña
+==========================================================
+ PUBLICACIÓN/api/usuarios/activar:
+ export const activarCuenta = async (req, res) => {
+  const { token, nuevaPassword } = req.body;
+
+  if (!token || !nuevaPassword) {
+    return res.status(400).json({ message: "Token y contraseña son requeridos" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const correo = decoded.correo;
+
+    const pool = await sql.connect(process.env.DB_CONNECTION_STRING);
+    const result = await pool.request()
+      .input("correo", sql.NVarChar, correo)
+      .query("SELECT * FROM Usuario WHERE correo = @correo");
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    const hashedPassword = await bcrypt.hash(nuevaPassword, 10);
+
+    await pool.request()
+      .input("correo", sql.NVarChar, correo)
+      .input("contrasena_encriptada", sql.NVarChar, hashedPassword)
+      .query("UPDATE Usuario SET contrasena_encriptada = @contrasena_encriptada WHERE correo = @correo");
+
+    return res.status(200).json({ message: "Cuenta activada correctamente" });
+
+  } catch (error) {
+    console.error("Error al activar cuenta:", error);
+    return res.status(400).json({ message: "Token inválido o expirado" });
+  }
+};
+
+3. Interfaz:
+========================================================================
+Una página /activar-cuentaque:
+
+Recibe el tokenpor query string.
+
+Pide al usuario establecer su contraseña.
+
+Envía el tokeny la `nuevaPasswordal punto final POST /api/usuarios/activar.
+
+✅ 📑 Cómo sería el flujo técnico:
+Un activar-cuenta.htmlsencillo:
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Activar cuenta</title>
+</head>
+<body>
+  <h2>Activar cuenta</h2>
+  <form id="activationForm">
+    <label>Nueva contraseña:</label>
+    <input type="password" id="password" required><br>
+    <label>Confirmar contraseña:</label>
+    <input type="password" id="confirmPassword" required><br>
+    <button type="submit">Establecer contraseña</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+    document.getElementById("activationForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        document.getElementById("message").innerText = "Las contraseñas no coinciden";
+        return;
+      }
+
+      const response = await fetch("http://TU_BACKEND/api/usuarios/activar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, nuevaPassword: password })
+      });
+
+      const data = await response.json();
+      document.getElementById("message").innerText = data.message;
+    });
+  </script>
+</body>
+</html>
+
+Backend Node.js ( bcrypt + SQL):
+
+const hashedPassword = await bcrypt.hash(nuevaPassword, 10);
+await pool.request()
+  .input("correo", sql.NVarChar, correo)
+  .input("contrasena_encriptada", sql.NVarChar, hashedPassword)
+  .query("UPDATE Usuario SET contrasena_encriptada = @contrasena_encriptada WHERE correo = @correo");
+
+
+
+
+

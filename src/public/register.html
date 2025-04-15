@@ -25,50 +25,50 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="index.html" class="icon-link">
+                    <a href="index.html" class="icon-link" title="Intercorp Retail">
                         <img src="assets/imgs/intercorp-azul.ico" alt="Icono" class="icono">
                         <span class="title">Intercorp Retail</span>
                     </a>
                 </li>
-
+    
                 <li>
-                    <a href="index.html">
+                    <a href="index.html" title="Dashboard">
                         <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" title="Gestión del Negocio">
                         <span class="icon"><ion-icon name="business-outline"></ion-icon></span>
                         <span class="title">Gestión del Negocio</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="register.html" title="Gestión de Usuarios">
                         <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
                         <span class="title">Gestión de Usuarios</span>
                     </a>
                 </li>
                 <li>
-                    <a href="accesoRemoto.html">
+                    <a href="accesoRemoto.html" title="Accesos Remotos">
                         <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
                         <span class="title">Accesos Remotos</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" title="Inventario General">
                         <span class="icon"><ion-icon name="file-tray-full-outline"></ion-icon></span>
                         <span class="title">Inventario General</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" title="Base del Conocimiento">
                         <span class="icon"><ion-icon name="archive-outline"></ion-icon></span>
                         <span class="title">Base del Conocimiento</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" title="Cerrar Sesión">
                         <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
                         <span class="title">Cerrar Sesión</span>
                     </a>
@@ -76,6 +76,7 @@
             </ul>
         </div>
     </div>
+    
 
     <!-- ================================ Main ===============================================-->
     <div class="main">
@@ -99,6 +100,8 @@
         <div class="container min-w-full p-4">
             <!-- Barra superior con filtros -->
             <div class="flex justify-between items-center mb-6">
+                <!-- Título -->
+                <h1 class="text-2xl font-semibold text-gray-700">Gestión de Usuarios</h1>
                 <button class="text-blue-500 text-2xl">
                 </button>
                 <div class="flex space-x-2">
@@ -204,8 +207,8 @@
     <script>
         let TABLA = $('#myTable').DataTable({
             columnDefs: [
-        { className: 'text-center', targets: '_all' } // Asegura que todas las columnas estén centradas
-    ]
+                { className: 'text-center', targets: '_all' } // Asegura que todas las columnas estén centradas
+            ]
             // searching: false
         });
 
@@ -242,7 +245,7 @@
         // Cargar los roles desde el backend y llenar el select
         async function cargarRoles() {
             try {
-                const response = await fetch('/api/roles'); // Asegúrate de que esta URL esté correcta
+                const response = await fetch('/api/auth/roles'); // Asegúrate de que esta URL esté correcta
                 const roles = await response.json(); // Convierte la respuesta en formato JSON
 
                 const selectRol = document.getElementById('id_rol');
@@ -267,7 +270,7 @@
         // Cargar las áreas desde el backend y llenar el select
         async function cargarAreas() {
             try {
-                const response = await fetch('/api/areas'); // Asegúrate de que esta URL esté correcta
+                const response = await fetch('/api/auth/areas'); // Asegúrate de que esta URL esté correcta
                 const areas = await response.json(); // Convierte la respuesta en formato JSON
 
                 const selectArea = document.getElementById('id_area');
@@ -292,7 +295,7 @@
         // Cargar los cargos desde el backend y llenar el select
         async function cargarCargos() {
             try {
-                const response = await fetch('/api/cargos'); // Asegúrate de que esta URL esté correcta
+                const response = await fetch('/api/auth/cargos'); // Asegúrate de que esta URL esté correcta
                 const cargos = await response.json(); // Convierte la respuesta en formato JSON
 
                 const selectCargo = document.getElementById('id_cargo');
@@ -317,7 +320,7 @@
 
         async function listarUsuarios() {
             try {
-                const response = await fetch('/api/usuario'); // Asegúrate de que esta URL esté correcta
+                const response = await fetch('/api/auth/usuario'); // Asegúrate de que esta URL esté correcta
                 if (!response.ok) throw new Error('No se pudo obtener la lista de usuarios');
 
                 const usuarios = await response.json(); // Convierte la respuesta en formato JSON
@@ -378,7 +381,7 @@
 
 
             try {
-                const response = await fetch('/api/usuario', {
+                const response = await fetch('/api/auth/usuario', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
