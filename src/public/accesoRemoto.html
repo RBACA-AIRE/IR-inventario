@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+
 
 
     <style>
@@ -30,7 +35,7 @@
                         <span class="title">Intercorp Retail</span>
                     </a>
                 </li>
-    
+
                 <li>
                     <a href="index.html" title="Dashboard">
                         <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
@@ -76,7 +81,7 @@
             </ul>
         </div>
     </div>
-    
+
 
     <!-- ================================ Main ===============================================-->
     <div class="main">
@@ -168,20 +173,20 @@
                     <input type="text" name="ip" placeholder="IP" class="border px-4 py-2 rounded" required>
                     <input type="text" name="SistemaOperativo" placeholder="Sistema O." class="border px-4 py-2 rounded"
                         required>
-                    <select id="id_rol" name="id_rol" class="border px-4 py-2 rounded" required>
-                        <option value="">Seleccionar Sistemas</option>
+                    <select id="id_sistema" name="id_sistema" class="border px-4 py-2 rounded" required>
+                        <option value="">Seleccionar Sistemas I.</option>
                         <!-- Los sistemas se cargarán aquí dinámicamente -->
                     </select>
-                    <select id="id_area" name="id_area" class="border px-4 py-2 rounded" required>
+                    <select id="id_uunn" name="id_uunn" class="border px-4 py-2 rounded" required>
                         <option value="">Selecionar UUNN</option>
                         <!-- Los UUNN se cargarán aquí dinámicamente -->
                     </select>
-                    <select id="id_cargo" name="id_cargo" class="border px-4 py-2 rounded" required>
+                    <select id="id_ambiente" name="id_ambiente" class="border px-4 py-2 rounded" required>
                         <option value="">Selecionar Ambiente</option>
                         <!-- Los ambiente del servidor se cargarán aquí dinámicamente -->
                     </select>
-                    <select id="id_cargo" name="id_cargo" class="border px-4 py-2 rounded" required>
-                        <option value="">Tipo de Acceso</option>
+                    <select id="id_tipo_acceso" name="id_tipo_acceso" class="border px-4 py-2 rounded" required>
+                        <option value="">Seleccionar Tipo de Conexión</option>
                         <!-- Los acceso del servidor se cargarán aquí dinámicamente -->
                     </select>
 
@@ -189,7 +194,7 @@
                         <option value="">Seleccionar Estado</option>
                         <option value="activo">Activo</option>
                         <option value="inactivo">Inactivo</option>
-                    </select>
+                    </select>              
                 </div>
 
                 <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
@@ -253,194 +258,244 @@
     </script>
 
 
-    <script>
-        // Abrir el modal cuando se haga clic en el botón "Añadir Nuevo"
-        document.getElementById('addButton').addEventListener('click', function () {
-            document.getElementById('registroModal').classList.remove('hidden');
-            cargarRoles(); // Cargar roles cuando se abre el modal
-        });
+<script>
+    document.getElementById('addButton').addEventListener('click', function () {
+        document.getElementById('registroModal').classList.remove('hidden');
+        cargarSistemas(); 
+        cargarAmbientes();
+        cargarTipoAccesos();
+        cargarUUNN();
+    });
 
-        async function cargarSistemas() {
-    try {
-        const response = await fetch('/api/accesos/sistemas');
-        const sistemas = await response.json();
+    async function cargarSistemas() {
+        try {
+            const response = await fetch('/api/accesos/sistemas');
+            const sistemas = await response.json();
+            const selectSistema = document.getElementById('id_sistema');
+            selectSistema.innerHTML = '<option value="">Seleccionar Sistema I.</option>';
 
-        const selectSistema = document.getElementById('id_rol'); // Este campo lo usas para Sistema en tu modal
-        selectSistema.innerHTML = '<option value="">Seleccionar Sistema</option>';
-
-        if (Array.isArray(sistemas)) {
-            sistemas.forEach(sistema => {
-                const option = document.createElement('option');
-                option.value = sistema.id_sistema;
-                option.textContent = sistema.nombre_sistema;
-                selectSistema.appendChild(option);
-            });
-        } else {
-            console.error('Los sistemas no son una lista válida', sistemas);
+            if (Array.isArray(sistemas)) {
+                sistemas.forEach(sistema => {
+                    const option = document.createElement('option');
+                    option.value = sistema.id_sistema;
+                    option.textContent = sistema.nombre;
+                    selectSistema.appendChild(option);
+                });
+            } else {
+                console.error('Los sistemas no son una lista válida', sistemas);
+            }
+        } catch (error) {
+            console.error('Error al cargar los sistemas:', error);
         }
-    } catch (error) {
-        console.error('Error al cargar los sistemas:', error);
     }
-}
-        
-async function cargarAmbientes() {
-    try {
-        const response = await fetch('/api/accesos/ambientes');
-        const ambientes = await response.json();
 
-        const selectAmbiente = document.querySelectorAll('select[name="id_cargo"]')[0];
-        selectAmbiente.innerHTML = '<option value="">Seleccionar Ambiente</option>';
+    async function cargarAmbientes() {
+        try {
+            const response = await fetch('/api/accesos/ambientes');
+            const ambientes = await response.json();
+            const selectAmbiente = document.getElementById('id_ambiente');
+            selectAmbiente.innerHTML = '<option value="">Seleccionar Ambiente</option>';
 
-        if (Array.isArray(ambientes)) {
-            ambientes.forEach(ambiente => {
-                const option = document.createElement('option');
-                option.value = ambiente.id_ambiente;
-                option.textContent = ambiente.nombre_ambiente;
-                selectAmbiente.appendChild(option);
-            });
-        } else {
-            console.error('Los ambientes no son una lista válida', ambientes);
+            if (Array.isArray(ambientes)) {
+                ambientes.forEach(ambiente => {
+                    const option = document.createElement('option');
+                    option.value = ambiente.id_ambiente;
+                    option.textContent = ambiente.nombre;
+                    selectAmbiente.appendChild(option);
+                });
+            } else {
+                console.error('Los ambientes no son una lista válida', ambientes);
+            }
+        } catch (error) {
+            console.error('Error al cargar los ambientes:', error);
         }
-    } catch (error) {
-        console.error('Error al cargar los ambientes:', error);
     }
-}
 
-async function cargarTipoAccesos() {
-    try {
-        const response = await fetch('/api/accesos/tipoacceso');
-        const accesos = await response.json();
+    async function cargarTipoAccesos() {
+        try {
+            const response = await fetch('/api/accesos/tipoconexion');
+            const accesos = await response.json();
+            const selectAcceso = document.getElementById('id_tipo_acceso');
+            selectAcceso.innerHTML = '<option value="">Seleccionar Tipo de Acceso</option>';
 
-        const selectAcceso = document.querySelectorAll('select[name="id_cargo"]')[1];
-        selectAcceso.innerHTML = '<option value="">Seleccionar Tipo de Acceso</option>';
-
-        if (Array.isArray(accesos)) {
-            accesos.forEach(acceso => {
-                const option = document.createElement('option');
-                option.value = acceso.id_tipo_acceso;
-                option.textContent = acceso.nombre_tipo_acceso;
-                selectAcceso.appendChild(option);
-            });
-        } else {
-            console.error('Los tipos de acceso no son una lista válida', accesos);
+            if (Array.isArray(accesos)) {
+                accesos.forEach(acceso => {
+                    const option = document.createElement('option');
+                    option.value = acceso.id_tipo_acceso;
+                    option.textContent = acceso.nombre;
+                    selectAcceso.appendChild(option);
+                });
+            } else {
+                console.error('Los tipos de acceso no son una lista válida', accesos);
+            }
+        } catch (error) {
+            console.error('Error al cargar los tipos de acceso:', error);
         }
-    } catch (error) {
-        console.error('Error al cargar los tipos de acceso:', error);
     }
-}
 
-        async function listarAccesos() {
-            try {
-                const response = await fetch('/api/accesos/accesos'); // Asegúrate de que esta URL esté correcta
-                if (!response.ok) throw new Error('No se pudo obtener la lista de accesos');
+    async function cargarUUNN() {
+        try {
+            const response = await fetch('/api/accesos/unidadnegocio');
+            const unidades = await response.json();
+            const selectUUNN = document.getElementById('id_uunn');
+            selectUUNN.innerHTML = '<option value="">Seleccionar Unidad de Negocio</option>';
 
-                const accesos = await response.json(); // Convierte la respuesta en formato JSON
+            if (Array.isArray(unidades)) {
+                unidades.forEach(unidad => {
+                    const option = document.createElement('option');
+                    option.value = unidad.id_uunn;
+                    option.textContent = unidad.nombre;
+                    selectUUNN.appendChild(option);
+                });
+            } else {
+                console.error('Las unidades de negocio no son una lista válida', unidades);
+            }
+        } catch (error) {
+            console.error('Error al cargar las unidades de negocio:', error);
+        }
+    }
 
-                if (accesos && Array.isArray(accesos)) {
-                    // Limpiamos la tabla antes de agregar nuevos datos
-                    TABLA.clear();
+    async function listarAccesos() {
+        try {
+            const response = await fetch('/api/accesos/accesos');
+            if (!response.ok) throw new Error('No se pudo obtener la lista de accesos');
+            const accesos = await response.json();
 
-                    // Agregamos cada acceso a la tabla
-                    accesos.forEach(acceso => {
-                        TABLA.row.add([
-                            acceso.Id,                            // ID del servidor (ahora el IdResultado que es el id_servidor)
-                            acceso.NombreServidor,                         // Nombre del servidor
-                            acceso.DireccionIP,                            // Dirección IP del servidor
-                            acceso.SistemaOperativo,                       // Sistema operativo
-                            acceso.SistemaNombre,                                          // (Parece un valor fijo, asegúrate que sea necesario)
-                            acceso.UnidadNegocio,                         // Unidad de negocio
-                            acceso.Ambiente,                               // Ambiente
-                            acceso.TipoAcceso,                             // Tipo de acceso
-                            acceso.UsuarioCredencial,                      // Usuario de la credencial
-                            acceso.ContrasenaEncriptada,                   // Contraseña encriptada (puedes mostrarla o manejarla de forma oculta)
-                            acceso.UsuarioCredencialDB,                    // Usuario de la credencial de base de datos
-                            acceso.ContrasenaEncriptadaDB,                 // Contraseña encriptada de la base de datos
-                            acceso.UsuarioCredencialApp,                   // Usuario de la credencial de la aplicación
-                            acceso.ContrasenaEncriptadaApp,                // Contraseña encriptada de la aplicación
-                            acceso.EstadoCredencial === 1 ? 'Activo' : 'Inactivo', // Estado de la credencial
-                            `  
-                        <button class="flex items-center gap-2 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded transition">
+            if (accesos && Array.isArray(accesos)) {
+                TABLA.clear();
+                accesos.forEach(acceso => {
+                    TABLA.row.add([
+                        acceso.Id,
+                        acceso.NombreServidor,
+                        acceso.DireccionIP,
+                        acceso.SistemaOperativo,
+                        acceso.SistemaNombre,
+                        acceso.UnidadNegocio,
+                        acceso.Ambiente,
+                        acceso.TipoAcceso,
+                        acceso.UsuarioCredencial,
+                        generarCampoPassword(acceso.ContrasenaEncriptada),
+                        acceso.UsuarioCredencialDB,
+                        generarCampoPassword(acceso.ContrasenaEncriptadaDB),
+                        acceso.UsuarioCredencialApp,
+                        generarCampoPassword(acceso.ContrasenaEncriptadaApp),
+                        acceso.EstadoCredencial == 1 ? 'Activo' : 'Inactivo',
+                        `<button class="flex items-center gap-2 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded transition">
                             <ion-icon name="create-outline" class="text-lg"></ion-icon> 
                             <span>Editar</span>
-                        </button>
-                    `
-                        ]);
-                    });
-
-                    // Redibujamos la tabla después de agregar todos los elementos
-                    TABLA.draw();
-                } else {
-                    console.error('Los accesos no son una lista válida');
-                }
-            } catch (error) {
-                console.error('Error al cargar los accesos:', error);
-            }
-        }
-
-
-
-        // Cerrar el modal si se hace clic fuera del modal
-        window.addEventListener('click', function (e) {
-            if (e.target === document.getElementById('registroModal')) {
-                document.getElementById('registroModal').classList.add('hidden');
-            }
-        });
-
-        // Enviar el formulario de registro
-        document.getElementById('registroForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const formData = new FormData(this);
-            const data = {
-                nombre_completo: formData.get('nombre'),
-                username: formData.get('username'),
-                correo: formData.get('correo'),
-                celular: formData.get('celular'),
-                password: formData.get('password'),
-                id_rol: formData.get('id_rol'),
-                id_area: formData.get('id_area'),
-                id_cargo: formData.get('id_cargo'),
-                estado: formData.get('estado')
-            };
-
-
-            try {
-                const response = await fetch('/api/usuario', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
+                        </button>`
+                    ]);
                 });
-
-                const result = await response.json();
-                const mensaje = document.getElementById('registroMensaje');
-
-                if (response.ok) {
-                    mensaje.textContent = 'Usuario registrado correctamente';
-                    mensaje.classList.remove('text-red-600');
-                    mensaje.classList.add('text-green-600');
-                    this.reset(); // Resetea el formulario
-
-                    setTimeout(() => {
-                        document.getElementById('registroModal').classList.add('hidden'); // Cierra el modal
-                    }, 2000);
-                } else {
-                    mensaje.textContent = result.message || 'Error al registrar usuario';
-                    mensaje.classList.remove('text-green-600');
-                    mensaje.classList.add('text-red-600');
-                }
-            } catch (error) {
-                console.error('Error en el registro:', error);
+                TABLA.draw();
+            } else {
+                console.error('Los accesos no son una lista válida');
             }
-        });
+        } catch (error) {
+            console.error('Error al cargar los accesos:', error);
+        }
+    }
 
-    </script>
+    function generarCampoPassword(valor) {
+        const idCampo = `campo_${Math.random().toString(36).substring(2, 10)}`;
+        const oculto = '••••••••';
+
+        return `
+            <div class="flex items-center gap-2">
+                <span id="${idCampo}" class="font-mono">${oculto}</span>
+                <button 
+                    class="text-blue-600 hover:text-blue-800 transition icon-button" 
+                    onclick="togglePassword('${idCampo}', '${valor}', this)"
+                    title="Mostrar contraseña"
+                >
+                    <ion-icon name="eye-outline" class="eye-icon"></ion-icon>
+                </button>
+            </div>
+        `;
+    }
+
+    function togglePassword(idCampo, valor, boton) {
+        const campo = document.getElementById(idCampo);
+        const icono = boton.querySelector('ion-icon');
+        const mostrando = (campo.textContent === '••••••••');
+        icono.classList.add('eye-blink');
+
+        setTimeout(() => {
+            campo.textContent = mostrando ? valor : '••••••••';
+            icono.setAttribute('name', mostrando ? 'eye-off-outline' : 'eye-outline');
+            boton.setAttribute('title', mostrando ? 'Ocultar contraseña' : 'Mostrar contraseña');
+            icono.classList.remove('eye-blink');
+        }, 200);
+    }
+
+    window.addEventListener('click', function (e) {
+        if (e.target === document.getElementById('registroModal')) {
+            document.getElementById('registroModal').classList.add('hidden');
+        }
+    });
+
+    document.getElementById('registroForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+
+        const data = {
+            Id: formData.get('id'),
+            NombreServidor: formData.get('nombreServidor'),
+            DireccionIP: formData.get('direccionIP'),
+            SistemaOperativo: formData.get('sistemaOperativo'),
+            SistemaNombre: formData.get('sistemaNombre'),
+            UnidadNegocio: formData.get('unidadNegocio'),
+            Ambiente: formData.get('ambiente'),
+            TipoAcceso: formData.get('tipoAcceso'),
+            UsuarioCredencial: formData.get('usuarioCredencial'),
+            ContrasenaEncriptada: formData.get('contrasenaEncriptada'),
+            UsuarioCredencialDB: formData.get('usuarioCredencialDB'),
+            ContrasenaEncriptadaDB: formData.get('contrasenaEncriptadaDB'),
+            UsuarioCredencialApp: formData.get('usuarioCredencialApp'),
+            ContrasenaEncriptadaApp: formData.get('contrasenaEncriptadaApp'),
+            EstadoCredencial: formData.get('estadoCredencial')
+        };
+
+        try {
+            const response = await fetch('/api/accesos/accesos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            const mensaje = document.getElementById('registroMensaje');
+
+            if (response.ok) {
+                mensaje.textContent = 'Acceso registrado correctamente';
+                mensaje.classList.remove('text-red-600');
+                mensaje.classList.add('text-green-600');
+                this.reset();
+                setTimeout(() => {
+                    document.getElementById('registroModal').classList.add('hidden');
+                }, 2000);
+            } else {
+                mensaje.textContent = result.message || 'Error al registrar acceso';
+                mensaje.classList.remove('text-green-600');
+                mensaje.classList.add('text-red-600');
+            }
+        } catch (error) {
+            console.error('Error en el registro:', error);
+            const mensaje = document.getElementById('registroMensaje');
+            mensaje.textContent = 'Ocurrió un error en la petición.';
+            mensaje.classList.remove('text-green-600');
+            mensaje.classList.add('text-red-600');
+        }
+    });
+</script>
 
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             listarAccesos();
+            cargarAmbientes();
+            cargarSistemas();
+            cargarTipoAccesos();
+            cargarUUNN();
         });
     </script>
 </body>

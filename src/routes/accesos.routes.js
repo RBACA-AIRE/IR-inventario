@@ -5,9 +5,10 @@ import {
   createAcceso,
   updateAcceso,
   deleteAcceso,
-  cargarAmbientes,
   cargarSistemas,
-  cargarTipoAccesos
+  cargarAmbientes,
+  cargarUnidadNegocio,
+  cargarTipoConexion
 } from "../controllers/accesos.controller.js";
 
 const router = Router();
@@ -19,8 +20,9 @@ router.post("/accesos", createAcceso);           // Crear un nuevo acceso remoto
 router.put("/accesos/:id", updateAcceso);        // Actualizar un acceso remoto
 router.delete("/accesos/:id", deleteAcceso);     // Eliminar un acceso remoto
 
-router.get("/sistemas", cargarSistemas); //obtener roles
-router.get("/ambientes", cargarAmbientes); //obtener areas
-router.get("/tipoacceso", cargarTipoAccesos); // obtener cargos
+router.get("/sistemas", cargarSistemas); //obtener sistemas
+router.get("/ambientes", cargarAmbientes); //obtener ambientes
+router.get("/tipoconexion", cargarTipoConexion); // obtener tipo de acceso
+router.get("/unidadnegocio", cargarUnidadNegocio); //obtener unidad de negocio
 export default router;
 

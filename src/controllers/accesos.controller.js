@@ -1,4 +1,5 @@
 import { getConnection } from "../database/connectionSQLServer.js";
+import sql from "mssql";
 
 // Crear acceso
 export const createAcceso = async (req, res) => {
@@ -27,43 +28,112 @@ export const createAcceso = async (req, res) => {
   }
 };
 
-// Aquí se incluiría la función cargarAmbientes si la necesitas
+// Endpoint para obtener Ambientes desde la base de datos
 export const cargarAmbientes = async (req, res) => {
   try {
-    const connection = await getConnection();
-    const result = await connection.request().query("SELECT * FROM Ambiente"); // Ejemplo de consulta
-    res.status(200).json(result.recordset);
+    const pool = await sql.connect(process.env.DB_CONNECTION_STRING);
+    // Ajusta el nombre de la tabla y las columnas según lo necesario
+    const result = await pool.request().query("SELECT id_ambiente, nombre FROM Ambientes");
+
+    if (result.recordset.length ===0){
+      return res
+      .status(404)
+      .json({success: false, message: "No se encontraron ambientes"});
+    }
+
+     // Enviar los ambientes como respuesta
+     return res.status(200).json(result.recordset);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al cargar ambientes", error: error.message });
-  }
+    console.error("Error al obtener los Ambientes:", error);
+    return res
+    .status(500)
+    .json({
+      success:false,
+      message: "Error al obtener los Ambientes",
+      error:error.message
+    });
+  }  
 };
 
-// Crear la función cargarSistemas si la necesitas
+// Endpoint para obtener Sistemas informaticos desde la base de datos
 export const cargarSistemas = async (req, res) => {
   try {
-    const connection = await getConnection();
-    const result = await connection.request().query("SELECT * FROM Sistema"); // Ejemplo de consulta
-    res.status(200).json(result.recordset);
+    const pool = await sql.connect(process.env.DB_CONNECTION_STRING);
+
+    // Ajusta el nombre de la tabla y las columnas según lo necesario
+    const result = await pool.request().query("SELECT id_sistema, nombre FROM Sistemas");
+
+    if (result.recordset.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No se encontraron Sistemas Informaticos" });
+    }
+    
+// Enviar los sistemas como respuesta
+    return res.status(200).json(result.recordset);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al cargar sistemas", error: error.message });
+    console.error("Error al obtener Sistemas Informaticos:", error);
+    return res
+    .status(500)
+    .json({
+      success: false,
+      message: "Error al obtener Sistemas Informaticos",
+      error: error.message,
+    });
   }
 };
-
 // Crear la función cargarTipoAccesos si la necesitas
-export const cargarTipoAccesos = async (req, res) => {
-  try {
-    const connection = await getConnection();
-    const result = await connection.request().query("SELECT * FROM TipoAcceso"); // Ejemplo de consulta
-    res.status(200).json(result.recordset);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al cargar tipos de acceso", error: error.message });
+export const cargarTipoConexion = async (req, res) => {
+ try {
+  const pool = await sql.connect(process.env.DB_CONNECTION_STRING);
+
+  // Ajusta el nombre de la tabla y las columnas según lo necesario
+  const result = await pool.request().query("SELECT id_tipo_acceso, nombre FROM TipoAcceso");
+
+  if (result.recordset.length === 0) {
+    return res
+    .status(404)
+    .json({success: false, message: "No se encontraron tipos de accesos"});
   }
+
+  // Enviar los sistemas como respuesta
+  return res.status(200).json(result.recordset);
+ } catch (error){
+  console.error("Error al obtener Tipo de Conexión:", error);
+  return res
+  .status(500)
+  .json({
+    success: false,
+    message: "Error al obtener Tipo de Conexión",
+    error: error.message
+  });
+ }
 };
 
+// Crear la función cargar Unidad de negocio si la necesitas
+export const cargarUnidadNegocio = async (req, res) => {
+  try {
+    const pool = await sql.connect(process.env.DB_CONNECTION_STRING);
 
+    const result = await pool.request().query("SELECT id_uunn, nombre FROM UnidadNegocio");
+    if (result.recordset.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No se encontraron Unidades de Negocios" });
+    }
+    // Enviar los roles como respuesta
+    return res.status(200).json(result.recordset); // Devuelve los uunn
+  } catch (error) {
+    console.error("Error al obtener Unidades de Negocio:", error);
+    return res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error al obtener Unidades de Negocio",
+        error: error.message,
+      });
+    }
+};
 
 
 
