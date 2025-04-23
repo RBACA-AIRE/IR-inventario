@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" title="Gestión del Negocio">
+                    <a href="404-page.html" title="Gestión del Negocio">
                         <span class="icon"><ion-icon name="business-outline"></ion-icon></span>
                         <span class="title">Gestión del Negocio</span>
                     </a>
@@ -55,19 +55,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" title="Accesos Remotos">
+                    <a href="accesoRemoto.html" title="Accesos Remotos">
                         <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
                         <span class="title">Accesos Remotos</span>
                     </a>
                 </li>
                 <li>
-                    <a href="" title="Inventario General">
+                    <a href="404-page.html" title="Inventario General">
                         <span class="icon"><ion-icon name="file-tray-full-outline"></ion-icon></span>
                         <span class="title">Inventario General</span>
                     </a>
                 </li>
                 <li>
-                    <a href="" title="Base del Conocimiento">
+                    <a href="404-page.html" title="Base del Conocimiento">
                         <span class="icon"><ion-icon name="archive-outline"></ion-icon></span>
                         <span class="title">Base del Conocimiento</span>
                     </a>
@@ -165,9 +165,10 @@
 
     <!-- Modal de Registro -->
     <div id="registroModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center hidden">
-        <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
+        <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl relative overflow-y-auto max-h-screen">
             <h2 class="text-2xl font-semibold mb-4">Registrar Acceso Remoto</h2>
             <form id="registroForm">
+                <!-- Datos generales -->
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <input type="text" name="hostname" placeholder="Hostname" class="border px-4 py-2 rounded" required>
                     <input type="text" name="ip" placeholder="IP" class="border px-4 py-2 rounded" required>
@@ -175,26 +176,45 @@
                         required>
                     <select id="id_sistema" name="id_sistema" class="border px-4 py-2 rounded" required>
                         <option value="">Seleccionar Sistemas I.</option>
-                        <!-- Los sistemas se cargarán aquí dinámicamente -->
                     </select>
                     <select id="id_uunn" name="id_uunn" class="border px-4 py-2 rounded" required>
                         <option value="">Selecionar UUNN</option>
-                        <!-- Los UUNN se cargarán aquí dinámicamente -->
                     </select>
                     <select id="id_ambiente" name="id_ambiente" class="border px-4 py-2 rounded" required>
                         <option value="">Selecionar Ambiente</option>
-                        <!-- Los ambiente del servidor se cargarán aquí dinámicamente -->
                     </select>
                     <select id="id_tipo_acceso" name="id_tipo_acceso" class="border px-4 py-2 rounded" required>
                         <option value="">Seleccionar Tipo de Conexión</option>
-                        <!-- Los acceso del servidor se cargarán aquí dinámicamente -->
                     </select>
-
                     <select name="estado" class="border px-4 py-2 rounded" required>
                         <option value="">Seleccionar Estado</option>
                         <option value="activo">Activo</option>
                         <option value="inactivo">Inactivo</option>
-                    </select>              
+                    </select>
+                </div>
+
+                <!-- Credenciales de Sistema Operativo -->
+                <h3 class="text-lg font-semibold mb-2">Credenciales de S.O:</h3>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <input type="text" name="usuario_so" placeholder="Usuario S.O." class="border px-4 py-2 rounded">
+                    <input type="password" name="password_so" placeholder="Contraseña S.O."
+                        class="border px-4 py-2 rounded">
+                </div>
+
+                <!-- Credenciales de Base de Datos -->
+                <h3 class="text-lg font-semibold mb-2">Credenciales de BD:</h3>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <input type="text" name="usuario_bd" placeholder="Usuario BD" class="border px-4 py-2 rounded">
+                    <input type="password" name="password_bd" placeholder="Contraseña BD"
+                        class="border px-4 py-2 rounded">
+                </div>
+
+                <!-- Credenciales de Aplicación -->
+                <h3 class="text-lg font-semibold mb-2">Credenciales de APP:</h3>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <input type="text" name="usuario_app" placeholder="Usuario APP" class="border px-4 py-2 rounded">
+                    <input type="password" name="password_app" placeholder="Contraseña APP"
+                        class="border px-4 py-2 rounded">
                 </div>
 
                 <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
@@ -202,12 +222,11 @@
                 </button>
             </form>
 
-
-
             <p id="registroMensaje" class="mt-4 text-center text-sm text-gray-600"></p>
             <button id="closeModal" class="absolute top-2 right-2 text-2xl text-gray-500">&times;</button>
         </div>
     </div>
+
 
     <!-- ==================== Scripts ========================= -->
     <script src="assets/js/main.js"></script>
@@ -258,148 +277,148 @@
     </script>
 
 
-<script>
-    document.getElementById('addButton').addEventListener('click', function () {
-        document.getElementById('registroModal').classList.remove('hidden');
-        cargarSistemas(); 
-        cargarAmbientes();
-        cargarTipoAccesos();
-        cargarUUNN();
-    });
+    <script>
+        document.getElementById('addButton').addEventListener('click', function () {
+            document.getElementById('registroModal').classList.remove('hidden');
+            cargarSistemas();
+            cargarAmbientes();
+            cargarTipoAccesos();
+            cargarUUNN();
+        });
 
-    async function cargarSistemas() {
-        try {
-            const response = await fetch('/api/accesos/sistemas');
-            const sistemas = await response.json();
-            const selectSistema = document.getElementById('id_sistema');
-            selectSistema.innerHTML = '<option value="">Seleccionar Sistema I.</option>';
+        async function cargarSistemas() {
+            try {
+                const response = await fetch('/api/accesos/sistemas');
+                const sistemas = await response.json();
+                const selectSistema = document.getElementById('id_sistema');
+                selectSistema.innerHTML = '<option value="">Seleccionar Sistema I.</option>';
 
-            if (Array.isArray(sistemas)) {
-                sistemas.forEach(sistema => {
-                    const option = document.createElement('option');
-                    option.value = sistema.id_sistema;
-                    option.textContent = sistema.nombre;
-                    selectSistema.appendChild(option);
-                });
-            } else {
-                console.error('Los sistemas no son una lista válida', sistemas);
+                if (Array.isArray(sistemas)) {
+                    sistemas.forEach(sistema => {
+                        const option = document.createElement('option');
+                        option.value = sistema.id_sistema;
+                        option.textContent = sistema.nombre;
+                        selectSistema.appendChild(option);
+                    });
+                } else {
+                    console.error('Los sistemas no son una lista válida', sistemas);
+                }
+            } catch (error) {
+                console.error('Error al cargar los sistemas:', error);
             }
-        } catch (error) {
-            console.error('Error al cargar los sistemas:', error);
         }
-    }
 
-    async function cargarAmbientes() {
-        try {
-            const response = await fetch('/api/accesos/ambientes');
-            const ambientes = await response.json();
-            const selectAmbiente = document.getElementById('id_ambiente');
-            selectAmbiente.innerHTML = '<option value="">Seleccionar Ambiente</option>';
+        async function cargarAmbientes() {
+            try {
+                const response = await fetch('/api/accesos/ambientes');
+                const ambientes = await response.json();
+                const selectAmbiente = document.getElementById('id_ambiente');
+                selectAmbiente.innerHTML = '<option value="">Seleccionar Ambiente</option>';
 
-            if (Array.isArray(ambientes)) {
-                ambientes.forEach(ambiente => {
-                    const option = document.createElement('option');
-                    option.value = ambiente.id_ambiente;
-                    option.textContent = ambiente.nombre;
-                    selectAmbiente.appendChild(option);
-                });
-            } else {
-                console.error('Los ambientes no son una lista válida', ambientes);
+                if (Array.isArray(ambientes)) {
+                    ambientes.forEach(ambiente => {
+                        const option = document.createElement('option');
+                        option.value = ambiente.id_ambiente;
+                        option.textContent = ambiente.nombre;
+                        selectAmbiente.appendChild(option);
+                    });
+                } else {
+                    console.error('Los ambientes no son una lista válida', ambientes);
+                }
+            } catch (error) {
+                console.error('Error al cargar los ambientes:', error);
             }
-        } catch (error) {
-            console.error('Error al cargar los ambientes:', error);
         }
-    }
 
-    async function cargarTipoAccesos() {
-        try {
-            const response = await fetch('/api/accesos/tipoconexion');
-            const accesos = await response.json();
-            const selectAcceso = document.getElementById('id_tipo_acceso');
-            selectAcceso.innerHTML = '<option value="">Seleccionar Tipo de Acceso</option>';
+        async function cargarTipoAccesos() {
+            try {
+                const response = await fetch('/api/accesos/tipoconexion');
+                const accesos = await response.json();
+                const selectAcceso = document.getElementById('id_tipo_acceso');
+                selectAcceso.innerHTML = '<option value="">Seleccionar Tipo de Acceso</option>';
 
-            if (Array.isArray(accesos)) {
-                accesos.forEach(acceso => {
-                    const option = document.createElement('option');
-                    option.value = acceso.id_tipo_acceso;
-                    option.textContent = acceso.nombre;
-                    selectAcceso.appendChild(option);
-                });
-            } else {
-                console.error('Los tipos de acceso no son una lista válida', accesos);
+                if (Array.isArray(accesos)) {
+                    accesos.forEach(acceso => {
+                        const option = document.createElement('option');
+                        option.value = acceso.id_tipo_acceso;
+                        option.textContent = acceso.nombre;
+                        selectAcceso.appendChild(option);
+                    });
+                } else {
+                    console.error('Los tipos de acceso no son una lista válida', accesos);
+                }
+            } catch (error) {
+                console.error('Error al cargar los tipos de acceso:', error);
             }
-        } catch (error) {
-            console.error('Error al cargar los tipos de acceso:', error);
         }
-    }
 
-    async function cargarUUNN() {
-        try {
-            const response = await fetch('/api/accesos/unidadnegocio');
-            const unidades = await response.json();
-            const selectUUNN = document.getElementById('id_uunn');
-            selectUUNN.innerHTML = '<option value="">Seleccionar Unidad de Negocio</option>';
+        async function cargarUUNN() {
+            try {
+                const response = await fetch('/api/accesos/unidadnegocio');
+                const unidades = await response.json();
+                const selectUUNN = document.getElementById('id_uunn');
+                selectUUNN.innerHTML = '<option value="">Seleccionar Unidad de Negocio</option>';
 
-            if (Array.isArray(unidades)) {
-                unidades.forEach(unidad => {
-                    const option = document.createElement('option');
-                    option.value = unidad.id_uunn;
-                    option.textContent = unidad.nombre;
-                    selectUUNN.appendChild(option);
-                });
-            } else {
-                console.error('Las unidades de negocio no son una lista válida', unidades);
+                if (Array.isArray(unidades)) {
+                    unidades.forEach(unidad => {
+                        const option = document.createElement('option');
+                        option.value = unidad.id_uunn;
+                        option.textContent = unidad.nombre;
+                        selectUUNN.appendChild(option);
+                    });
+                } else {
+                    console.error('Las unidades de negocio no son una lista válida', unidades);
+                }
+            } catch (error) {
+                console.error('Error al cargar las unidades de negocio:', error);
             }
-        } catch (error) {
-            console.error('Error al cargar las unidades de negocio:', error);
         }
-    }
 
-    async function listarAccesos() {
-        try {
-            const response = await fetch('/api/accesos/accesos');
-            if (!response.ok) throw new Error('No se pudo obtener la lista de accesos');
-            const accesos = await response.json();
+        async function listarAccesos() {
+            try {
+                const response = await fetch('/api/accesos/accesos');
+                if (!response.ok) throw new Error('No se pudo obtener la lista de accesos');
+                const accesos = await response.json();
 
-            if (accesos && Array.isArray(accesos)) {
-                TABLA.clear();
-                accesos.forEach(acceso => {
-                    TABLA.row.add([
-                        acceso.Id,
-                        acceso.NombreServidor,
-                        acceso.DireccionIP,
-                        acceso.SistemaOperativo,
-                        acceso.SistemaNombre,
-                        acceso.UnidadNegocio,
-                        acceso.Ambiente,
-                        acceso.TipoAcceso,
-                        acceso.UsuarioCredencial,
-                        generarCampoPassword(acceso.ContrasenaEncriptada),
-                        acceso.UsuarioCredencialDB,
-                        generarCampoPassword(acceso.ContrasenaEncriptadaDB),
-                        acceso.UsuarioCredencialApp,
-                        generarCampoPassword(acceso.ContrasenaEncriptadaApp),
-                        acceso.EstadoCredencial == 1 ? 'Activo' : 'Inactivo',
-                        `<button class="flex items-center gap-2 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded transition">
+                if (accesos && Array.isArray(accesos)) {
+                    TABLA.clear();
+                    accesos.forEach(acceso => {
+                        TABLA.row.add([
+                            acceso.Id,
+                            acceso.NombreServidor,
+                            acceso.DireccionIP,
+                            acceso.SistemaOperativo,
+                            acceso.SistemaNombre,
+                            acceso.UnidadNegocio,
+                            acceso.Ambiente,
+                            acceso.TipoAcceso,
+                            acceso.UsuarioCredencial,
+                            generarCampoPassword(acceso.ContrasenaEncriptada),
+                            acceso.UsuarioCredencialDB,
+                            generarCampoPassword(acceso.ContrasenaEncriptadaDB),
+                            acceso.UsuarioCredencialApp,
+                            generarCampoPassword(acceso.ContrasenaEncriptadaApp),
+                            acceso.EstadoCredencial == 1 ? 'Activo' : 'Inactivo',
+                            `<button class="flex items-center gap-2 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded transition">
                             <ion-icon name="create-outline" class="text-lg"></ion-icon> 
                             <span>Editar</span>
                         </button>`
-                    ]);
-                });
-                TABLA.draw();
-            } else {
-                console.error('Los accesos no son una lista válida');
+                        ]);
+                    });
+                    TABLA.draw();
+                } else {
+                    console.error('Los accesos no son una lista válida');
+                }
+            } catch (error) {
+                console.error('Error al cargar los accesos:', error);
             }
-        } catch (error) {
-            console.error('Error al cargar los accesos:', error);
         }
-    }
 
-    function generarCampoPassword(valor) {
-        const idCampo = `campo_${Math.random().toString(36).substring(2, 10)}`;
-        const oculto = '••••••••';
+        function generarCampoPassword(valor) {
+            const idCampo = `campo_${Math.random().toString(36).substring(2, 10)}`;
+            const oculto = '••••••••';
 
-        return `
+            return `
             <div class="flex items-center gap-2">
                 <span id="${idCampo}" class="font-mono">${oculto}</span>
                 <button 
@@ -411,82 +430,88 @@
                 </button>
             </div>
         `;
-    }
-
-    function togglePassword(idCampo, valor, boton) {
-        const campo = document.getElementById(idCampo);
-        const icono = boton.querySelector('ion-icon');
-        const mostrando = (campo.textContent === '••••••••');
-        icono.classList.add('eye-blink');
-
-        setTimeout(() => {
-            campo.textContent = mostrando ? valor : '••••••••';
-            icono.setAttribute('name', mostrando ? 'eye-off-outline' : 'eye-outline');
-            boton.setAttribute('title', mostrando ? 'Ocultar contraseña' : 'Mostrar contraseña');
-            icono.classList.remove('eye-blink');
-        }, 200);
-    }
-
-    window.addEventListener('click', function (e) {
-        if (e.target === document.getElementById('registroModal')) {
-            document.getElementById('registroModal').classList.add('hidden');
         }
-    });
 
-    document.getElementById('registroForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const formData = new FormData(this);
+        function togglePassword(idCampo, valor, boton) {
+            const campo = document.getElementById(idCampo);
+            const icono = boton.querySelector('ion-icon');
+            const mostrando = (campo.textContent === '••••••••');
+            icono.classList.add('eye-blink');
 
-        const data = {
-            Id: formData.get('id'),
-            NombreServidor: formData.get('nombreServidor'),
-            DireccionIP: formData.get('direccionIP'),
-            SistemaOperativo: formData.get('sistemaOperativo'),
-            SistemaNombre: formData.get('sistemaNombre'),
-            UnidadNegocio: formData.get('unidadNegocio'),
-            Ambiente: formData.get('ambiente'),
-            TipoAcceso: formData.get('tipoAcceso'),
-            UsuarioCredencial: formData.get('usuarioCredencial'),
-            ContrasenaEncriptada: formData.get('contrasenaEncriptada'),
-            UsuarioCredencialDB: formData.get('usuarioCredencialDB'),
-            ContrasenaEncriptadaDB: formData.get('contrasenaEncriptadaDB'),
-            UsuarioCredencialApp: formData.get('usuarioCredencialApp'),
-            ContrasenaEncriptadaApp: formData.get('contrasenaEncriptadaApp'),
-            EstadoCredencial: formData.get('estadoCredencial')
-        };
+            setTimeout(() => {
+                campo.textContent = mostrando ? valor : '••••••••';
+                icono.setAttribute('name', mostrando ? 'eye-off-outline' : 'eye-outline');
+                boton.setAttribute('title', mostrando ? 'Ocultar contraseña' : 'Mostrar contraseña');
+                icono.classList.remove('eye-blink');
+            }, 200);
+        }
 
-        try {
-            const response = await fetch('/api/accesos/accesos', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
+        window.addEventListener('click', function (e) {
+            if (e.target === document.getElementById('registroModal')) {
+                document.getElementById('registroModal').classList.add('hidden');
+            }
+        });
 
-            const result = await response.json();
-            const mensaje = document.getElementById('registroMensaje');
+        document.getElementById('registroForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
 
-            if (response.ok) {
-                mensaje.textContent = 'Acceso registrado correctamente';
-                mensaje.classList.remove('text-red-600');
-                mensaje.classList.add('text-green-600');
-                this.reset();
-                setTimeout(() => {
-                    document.getElementById('registroModal').classList.add('hidden');
-                }, 2000);
-            } else {
-                mensaje.textContent = result.message || 'Error al registrar acceso';
+            const data = {
+                Id: null,
+                NombreServidor: formData.get('hostname'),
+                DireccionIP: formData.get('ip'),
+                SistemaOperativo: formData.get('SistemaOperativo'),
+                SistemaNombre: formData.get('id_sistema'),
+                UnidadNegocio: formData.get('id_uunn'),
+                Ambiente: formData.get('id_ambiente'),
+                TipoAcceso: formData.get('id_tipo_acceso'),
+                EstadoCredencial: formData.get('estado'),
+
+                UsuarioCredencial: formData.get('usuario_so'),
+                ContrasenaEncriptada: formData.get('password_so'),
+
+                UsuarioCredencialDB: formData.get('usuario_bd'),
+                ContrasenaEncriptadaDB: formData.get('password_bd'),
+
+                UsuarioCredencialApp: formData.get('usuario_app'),
+                ContrasenaEncriptadaApp: formData.get('password_app')
+            };
+
+
+
+
+            try {
+                const response = await fetch('/api/accesos/accesos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                const mensaje = document.getElementById('registroMensaje');
+
+                if (response.ok) {
+                    mensaje.textContent = 'Acceso registrado correctamente';
+                    mensaje.classList.remove('text-red-600');
+                    mensaje.classList.add('text-green-600');
+                    this.reset();
+                    setTimeout(() => {
+                        document.getElementById('registroModal').classList.add('hidden');
+                    }, 2000);
+                } else {
+                    mensaje.textContent = result.message || 'Error al registrar acceso';
+                    mensaje.classList.remove('text-green-600');
+                    mensaje.classList.add('text-red-600');
+                }
+            } catch (error) {
+                console.error('Error en el registro:', error);
+                const mensaje = document.getElementById('registroMensaje');
+                mensaje.textContent = 'Ocurrió un error en la petición.';
                 mensaje.classList.remove('text-green-600');
                 mensaje.classList.add('text-red-600');
             }
-        } catch (error) {
-            console.error('Error en el registro:', error);
-            const mensaje = document.getElementById('registroMensaje');
-            mensaje.textContent = 'Ocurrió un error en la petición.';
-            mensaje.classList.remove('text-green-600');
-            mensaje.classList.add('text-red-600');
-        }
-    });
-</script>
+        });
+    </script>
 
 
     <script>
