@@ -4,29 +4,106 @@ import sql from "mssql";
 // Crear acceso
 export const createAcceso = async (req, res) => {
   try {
-    const { id_servidor, id_tipo_acceso, id_uunn, acceso_contacto } = req.body;
+    const {
+      NombreServidor,
+      DireccionIP,
+      SistemaOperativo,
+      SistemaNombre,
+      UnidadNegocio,
+      Ambiente,
+      EstadoCredencial,
+      UsuarioCredencial,
+      ContrasenaEncriptada,
+      CategoriaCredencial,
+      UsuarioCredencialDB,
+      ContrasenaEncriptadaDB,
+      EstadoCredencialDB,
+      CategoriaCredencialDB,
+      UsuarioCredencialApp,
+      ContrasenaEncriptadaApp,
+      EstadoCredencialApp,
+      CategoriaCredencialApp,
+      TipoAcceso
+    } = req.body;
 
     const connection = await getConnection();
-    const result = await connection.request()
-      .input("id_servidor", id_servidor)
-      .input("id_tipo_acceso", id_tipo_acceso)
-      .input("id_uunn", id_uunn)
-      .input("acceso_contacto", acceso_contacto)
+
+    // 1. Insertar en Servidor
+    const servidorResult = await connection.request()
+      .input("NombreServidor", sql.VarChar, NombreServidor)
+      .input("DireccionIP", sql.VarChar, DireccionIP)
+      .input("SistemaOperativo", sql.VarChar, SistemaOperativo)
+      .input("SistemaNombre", sql.Int, SistemaNombre)
+      .input("UnidadNegocio", sql.Int, UnidadNegocio)
+      .input("Ambiente", sql.Int, Ambiente)
+      .query(`
+        INSERT INTO Servidor (
+          nombre, direccion_ip, sistema_operativo, sistemaNombre, unidadNegocio, ambiente
+        )
+        OUTPUT INSERTED.id_servidor
+        VALUES (
+          @NombreServidor, @DireccionIP, @SistemaOperativo, @SistemaNombre, @UnidadNegocio, @Ambiente
+        )
+      `);
+
+    const id_servidor = servidorResult.recordset[0].id_servidor;
+
+    // 2. Insertar en Credencial
+    await connection.request()
+      .input("id_servidor", sql.Int, id_servidor)
+      .input("usuario", sql.VarChar, UsuarioCredencial)
+      .input("contrasena_encriptada", sql.VarChar, ContrasenaEncriptada)
+      .input("estado", sql.VarChar, EstadoCredencial)
+      .input("id_categoria", sql.Int, CategoriaCredencial)
+      .query(`
+        INSERT INTO Credencial (id_servidor, usuario, contrasena_encriptada, estado, id_categoria)
+        VALUES (@id_servidor, @usuario, @contrasena_encriptada, @estado, @id_categoria)
+      `);
+
+    // 3. Insertar en Credenciales_DB
+    await connection.request()
+      .input("id_servidor", sql.Int, id_servidor)
+      .input("usuario", sql.VarChar, UsuarioCredencialDB)
+      .input("contrasena_encriptada", sql.VarChar, ContrasenaEncriptadaDB)
+      .input("estado", sql.VarChar, EstadoCredencialDB)
+      .input("id_categoria", sql.Int, CategoriaCredencialDB)
+      .query(`
+        INSERT INTO Credenciales_DB (id_servidor, usuario, contrasena_encriptada, estado, id_categoria)
+        VALUES (@id_servidor, @usuario, @contrasena_encriptada, @estado, @id_categoria)
+      `);
+
+    // 4. Insertar en Credenciales_App
+    await connection.request()
+      .input("id_servidor", sql.Int, id_servidor)
+      .input("usuario", sql.VarChar, UsuarioCredencialApp)
+      .input("contrasena_encriptada", sql.VarChar, ContrasenaEncriptadaApp)
+      .input("estado", sql.VarChar, EstadoCredencialApp)
+      .input("id_categoria", sql.Int, CategoriaCredencialApp)
+      .query(`
+        INSERT INTO Credenciales_App (id_servidor, usuario, contrasena_encriptada, estado, id_categoria)
+        VALUES (@id_servidor, @usuario, @contrasena_encriptada, @estado, @id_categoria)
+      `);
+
+    // 5. Insertar en AccesoServidor
+    await connection.request()
+      .input("id_servidor", sql.Int, id_servidor)
+      .input("id_tipo_acceso", sql.Int, TipoAcceso)
+      .input("id_uunn", sql.Int, UnidadNegocio)
+      .input("acceso_contacto", sql.VarChar, null)
       .query(`
         INSERT INTO AccesoServidor (id_servidor, id_tipo_acceso, id_uunn, acceso_contacto)
-        OUTPUT INSERTED.id_acceso
         VALUES (@id_servidor, @id_tipo_acceso, @id_uunn, @acceso_contacto)
       `);
 
-    res.status(201).json({ 
-      message: "AccesoServidor creado correctamente", 
-      id: result.recordset[0].id_acceso 
-    });
+    res.status(201).json({ message: "Servidor y accesos registrados correctamente", id_servidor });
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al crear AccesoServidor", error: error.message });
+    console.error('Error al registrar acceso:', error);
+    res.status(500).json({ message: "Error al registrar acceso", error: error.message });
   }
 };
+
+
 
 // Endpoint para obtener Ambientes desde la base de datos
 export const cargarAmbientes = async (req, res) => {
