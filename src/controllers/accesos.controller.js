@@ -33,16 +33,14 @@ export const createAcceso = async (req, res) => {
       .input("NombreServidor", sql.VarChar, NombreServidor)
       .input("DireccionIP", sql.VarChar, DireccionIP)
       .input("SistemaOperativo", sql.VarChar, SistemaOperativo)
-      .input("SistemaNombre", sql.Int, SistemaNombre)
-      .input("UnidadNegocio", sql.Int, UnidadNegocio)
       .input("Ambiente", sql.Int, Ambiente)
       .query(`
         INSERT INTO Servidor (
-          nombre, direccion_ip, sistema_operativo, sistemaNombre, unidadNegocio, ambiente
+          nombre, direccion_ip, sistema_operativo, id_ambiente
         )
         OUTPUT INSERTED.id_servidor
         VALUES (
-          @NombreServidor, @DireccionIP, @SistemaOperativo, @SistemaNombre, @UnidadNegocio, @Ambiente
+          @NombreServidor, @DireccionIP, @SistemaOperativo, @Ambiente
         )
       `);
 
@@ -53,7 +51,7 @@ export const createAcceso = async (req, res) => {
       .input("id_servidor", sql.Int, id_servidor)
       .input("usuario", sql.VarChar, UsuarioCredencial)
       .input("contrasena_encriptada", sql.VarChar, ContrasenaEncriptada)
-      .input("estado", sql.VarChar, EstadoCredencial)
+      .input("estado", sql.Int, EstadoCredencial)
       .input("id_categoria", sql.Int, CategoriaCredencial)
       .query(`
         INSERT INTO Credencial (id_servidor, usuario, contrasena_encriptada, estado, id_categoria)
@@ -65,7 +63,7 @@ export const createAcceso = async (req, res) => {
       .input("id_servidor", sql.Int, id_servidor)
       .input("usuario", sql.VarChar, UsuarioCredencialDB)
       .input("contrasena_encriptada", sql.VarChar, ContrasenaEncriptadaDB)
-      .input("estado", sql.VarChar, EstadoCredencialDB)
+      .input("estado", sql.Int, EstadoCredencialDB)
       .input("id_categoria", sql.Int, CategoriaCredencialDB)
       .query(`
         INSERT INTO Credenciales_DB (id_servidor, usuario, contrasena_encriptada, estado, id_categoria)
@@ -77,7 +75,7 @@ export const createAcceso = async (req, res) => {
       .input("id_servidor", sql.Int, id_servidor)
       .input("usuario", sql.VarChar, UsuarioCredencialApp)
       .input("contrasena_encriptada", sql.VarChar, ContrasenaEncriptadaApp)
-      .input("estado", sql.VarChar, EstadoCredencialApp)
+      .input("estado", sql.Int, EstadoCredencialApp)
       .input("id_categoria", sql.Int, CategoriaCredencialApp)
       .query(`
         INSERT INTO Credenciales_App (id_servidor, usuario, contrasena_encriptada, estado, id_categoria)

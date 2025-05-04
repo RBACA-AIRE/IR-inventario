@@ -17,6 +17,6 @@ import {
   router.get("/areas", obtenerListadoAreas); //obtener areas
   router.get("/cargos", obtenerListadoCargos); // obtener cargos
   router.get("/usuario", obtenerListadoUsuarios); // Listar usuarios
-  router.post("/usuario", registerUsuario); // <- Nueva ruta de registro
+  router.post("/registerUsuario", registerUsuario); // <- Nueva ruta de registro
 
   export default router;

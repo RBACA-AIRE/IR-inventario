@@ -205,18 +205,14 @@ export const obtenerListadoUsuarios = async (req, res) => {
 
 // Función para registrar un usuario
 export const registerUsuario = async (req, res) => {
-  const { username, correo, password, id_rol, id_area, id_cargo } = req.body;
-
-  console.log(req.body);
+  const { nombre_completo, username, correo, celular, password, id_rol, id_area, id_cargo, estado_app} = req.body;
 
   // Validación de campos obligatorios
-  if (!username || !correo || !password || !id_rol, id_area, id_cargo) {
-    return res
-      .status(400)
-      .json({
-        message:
-          "Todos los campos (nombre_completo, username, correo, celular, password, id_rol, id_area, id_cargo) son requeridos",
-      });
+  if ( !nombre_completo || !username || !correo || !celular || !password || !id_rol || !id_area || !id_cargo || !estado_app) {
+    return res.status(400).json({
+      message:
+        "Todos los campos (nombre_completo, username, correo, celular, password, id_rol, id_area, id_cargo) son requeridos",
+    });
   }
 
   try {
@@ -244,7 +240,7 @@ export const registerUsuario = async (req, res) => {
       .input("correo", sql.NVarChar, correo)
       .input("contrasena_encriptada", sql.NVarChar, hashedPassword)
       .input("celular", sql.NVarChar, celular)
-      .input("estado_app", sql.NVarChar, estado_app)
+      .input("estado_app", sql.Int, estado_app)
       .input("id_rol", sql.Int, id_rol)
       .input("id_area", sql.Int, id_area)
       .input("id_cargo", sql.Int, id_cargo).query(`

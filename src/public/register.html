@@ -1,426 +1,571 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Control de Servidores</title>
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
-
-
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .dt-search {
-            display: none;
-        }
+      .dt-search {
+        display: none;
+      }
+      .text-center {
+        text-align: center;
+      }
     </style>
-    <!-- ===================Stilos ========================================= -->
-</head>
+  </head>
 
-<body>
-    <!-- ===============================Navegacion============================ -->
+  <body>
+    <!-- Navegación -->
     <div class="container">
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="index.html" class="icon-link" title="Intercorp Retail">
-                        <img src="assets/imgs/intercorp-azul.ico" alt="Icono" class="icono">
-                        <span class="title">Intercorp Retail</span>
-                    </a>
-                </li>
-    
-                <li>
-                    <a href="index.html" title="Dashboard">
-                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="404-page.html" title="Gestión del Negocio">
-                        <span class="icon"><ion-icon name="business-outline"></ion-icon></span>
-                        <span class="title">Gestión del Negocio</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="register.html" title="Gestión de Usuarios">
-                        <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-                        <span class="title">Gestión de Usuarios</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="accesoRemoto.html" title="Accesos Remotos">
-                        <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                        <span class="title">Accesos Remotos</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="404-page.html" title="Inventario General">
-                        <span class="icon"><ion-icon name="file-tray-full-outline"></ion-icon></span>
-                        <span class="title">Inventario General</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="404-page.html" title="Base del Conocimiento">
-                        <span class="icon"><ion-icon name="archive-outline"></ion-icon></span>
-                        <span class="title">Base del Conocimiento</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="" title="Cerrar Sesión">
-                        <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
-                        <span class="title">Cerrar Sesión</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+      <div class="navigation">
+        <ul>
+          <li>
+            <a href="index.html" class="icon-link" title="Intercorp Retail">
+              <img
+                src="assets/imgs/intercorp-azul.ico"
+                alt="Icono"
+                class="icono"
+              />
+              <span class="title">Intercorp Retail</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html" title="Dashboard">
+              <span class="icon"
+                ><ion-icon name="home-outline"></ion-icon
+              ></span>
+              <span class="title">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="404-page.html" title="Gestión del Negocio">
+              <span class="icon"
+                ><ion-icon name="business-outline"></ion-icon
+              ></span>
+              <span class="title">Gestión del Negocio</span>
+            </a>
+          </li>
+          <li>
+            <a href="register.html" title="Gestión de Usuarios">
+              <span class="icon"
+                ><ion-icon name="people-outline"></ion-icon
+              ></span>
+              <span class="title">Gestión de Usuarios</span>
+            </a>
+          </li>
+          <li>
+            <a href="accesoRemoto.html" title="Accesos Remotos">
+              <span class="icon"
+                ><ion-icon name="desktop-outline"></ion-icon
+              ></span>
+              <span class="title">Accesos Remotos</span>
+            </a>
+          </li>
+          <li>
+            <a href="404-page.html" title="Inventario General">
+              <span class="icon"
+                ><ion-icon name="file-tray-full-outline"></ion-icon
+              ></span>
+              <span class="title">Inventario General</span>
+            </a>
+          </li>
+          <li>
+            <a href="404-page.html" title="Base del Conocimiento">
+              <span class="icon"
+                ><ion-icon name="archive-outline"></ion-icon
+              ></span>
+              <span class="title">Base del Conocimiento</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" title="Cerrar Sesión">
+              <span class="icon"
+                ><ion-icon name="exit-outline"></ion-icon
+              ></span>
+              <span class="title">Cerrar Sesión</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-    
 
-    <!-- ================================ Main ===============================================-->
+    <!-- Main -->
     <div class="main">
-        <div class="topbar">
-            <div class="toggle">
-                <ion-icon name="menu-outline"></ion-icon>
-            </div>
-            <!-- <div class="search">
-                <label>
-                    <input type="text" placeholder="Search here">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
-            </div> -->
-            <div class="user">
-                <img src="assets/imgs/customer01.jpg" alt="">
-            </div>
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+        <div class="user">
+          <img src="assets/imgs/customer01.jpg" alt="Usuario" />
+        </div>
+      </div>
+
+      <!-- Tabla de registro -->
+      <div class="container min-w-full p-4">
+        <!-- Barra superior con filtros -->
+        <div class="flex justify-between items-center mb-6">
+          <!-- Título -->
+          <h1 class="text-2xl font-semibold text-gray-700">
+            Gestión de Usuarios
+          </h1>
+          <div class="flex space-x-2">
+            <input
+              type="text"
+              id="nombre"
+              class="border border-gray-300 rounded px-4 py-2"
+              placeholder="Nombres"
+            />
+            <input
+              type="text"
+              id="correo"
+              class="border border-gray-300 rounded px-4 py-2"
+              placeholder="Correo"
+            />
+            <button
+              id="searchButton"
+              class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
+            >
+              Buscar
+            </button>
+            <button
+              id="addButton"
+              class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            >
+              Añadir Nuevo
+            </button>
+          </div>
         </div>
 
-
-        <!-- ==================================tabla de registro ========================== -->
-        <div class="container min-w-full p-4">
-            <!-- Barra superior con filtros -->
-            <div class="flex justify-between items-center mb-6">
-                <!-- Título -->
-                <h1 class="text-2xl font-semibold text-gray-700">Gestión de Usuarios</h1>
-                <button class="text-blue-500 text-2xl">
-                </button>
-                <div class="flex space-x-2">
-                    <input type="text" id="nombre" class="border border-gray-300 rounded px-4 py-2"
-                        placeholder="Nombres">
-                    <input type="text" id="correo" class="border border-gray-300 rounded px-4 py-2"
-                        placeholder="Correo">
-                    <button id="searchButton"
-                        class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Buscar</button>
-                    <button id="addButton" class="bg-green-500 text-white px-4 py-2 rounded">Añadir Nuevo</button>
-                </div>
-            </div>
-
-            <!-- Tabla -->
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white border border-gray-300" id="myTable">
-                    <thead>
-                        <tr class="bg-blue-500 text-white text-center">
-                            <th class="py-2 px-4 border">ID</th>
-                            <th class="py-2 px-4 border">NOMBRE COMPLETO</th>
-                            <th class="py-2 px-4 border">USUARIO</th>
-                            <th class="py-2 px-4 border">AREA</th>
-                            <th class="py-2 px-4 border">CARGO</th>
-                            <th class="py-2 px-4 border">CORREO</th>
-                            <th class="py-2 px-4 border">CELULAR</th>
-                            <th class="py-2 px-4 border">ROL</th>
-                            <th class="py-2 px-4 border">ESTADO APP</th>
-                            <th class="py-2 px-4 border">VER/EDITAR</th>
-                        </tr>
-                    </thead>
-                    <tbody id="">
-                        <!-- Aquí se insertarán los datos dinámicamente -->
-                    </tbody>
-                </table>
-            </div>
+        <!-- Tabla -->
+        <div class="overflow-x-auto">
+          <table
+            class="min-w-full bg-white border border-gray-300"
+            id="myTable"
+          >
+            <thead>
+              <tr class="bg-blue-500 text-white text-center">
+                <th class="py-2 px-4 border">ID</th>
+                <th class="py-2 px-4 border">NOMBRE COMPLETO</th>
+                <th class="py-2 px-4 border">USUARIO</th>
+                <th class="py-2 px-4 border">AREA</th>
+                <th class="py-2 px-4 border">CARGO</th>
+                <th class="py-2 px-4 border">CORREO</th>
+                <th class="py-2 px-4 border">CELULAR</th>
+                <th class="py-2 px-4 border">ROL</th>
+                <th class="py-2 px-4 border">ESTADO APP</th>
+                <th class="py-2 px-4 border">VER/EDITAR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Datos cargados dinámicamente -->
+            </tbody>
+          </table>
         </div>
-        <!-- ============================ lista de detalles del pedido ===================== -->
+      </div>
     </div>
 
     <!-- Modal de Registro -->
-    <div id="registroModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center hidden">
-        <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
-            <h2 class="text-2xl font-semibold mb-4">Registrar Nuevo Usuario</h2>
-            <form id="registroForm">
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                    <input type="text" name="nombre" placeholder="Nombre Completo" class="border px-4 py-2 rounded"
-                        required>
-                    <input type="text" name="username" placeholder="Nombre de Usuario" class="border px-4 py-2 rounded"
-                        required>
+    <div
+      id="registroModal"
+      class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center hidden z-50"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl relative">
+        <h2 class="text-2xl font-semibold mb-4">Registrar Nuevo Usuario</h2>
+        <form id="registroForm">
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Nombre Completo"
+              class="border px-4 py-2 rounded"
+              required
+            />
+            <input
+              type="text"
+              name="username"
+              placeholder="Nombre de Usuario"
+              class="border px-4 py-2 rounded"
+              required
+            />
 
-                    <input type="email" name="correo" placeholder="Correo Electrónico" class="border px-4 py-2 rounded"
-                        required>
-                    <input type="text" name="celular" placeholder="Celular" class="border px-4 py-2 rounded" required>
+            <input
+              type="email"
+              name="correo"
+              placeholder="Correo Electrónico"
+              class="border px-4 py-2 rounded"
+              required
+            />
+            <input
+              type="text"
+              name="celular"
+              placeholder="Celular"
+              class="border px-4 py-2 rounded"
+              required
+            />
 
-                    <input type="password" name="password" placeholder="Contraseña" class="border px-4 py-2 rounded"
-                        required>
-                    <select id="id_rol" name="id_rol" class="border px-4 py-2 rounded" required>
-                        <option value="">Seleccionar Rol</option>
-                        <!-- Los roles se cargarán aquí dinámicamente -->
-                    </select>
-                    <select id="id_area" name="id_area" class="border px-4 py-2 rounded" required>
-                        <option value="">Selecionar Área</option>
-                        <!-- Los roles se cargarán aquí dinámicamente -->
-                    </select>
-                    <select id="id_cargo" name="id_cargo" class="border px-4 py-2 rounded" required>
-                        <option value="">Selecionar Cargo</option>
-                        <!-- Los roles se cargarán aquí dinámicamente -->
-                    </select>
+            <input
+              type="password"
+              name="password"
+              placeholder="Contraseña"
+              class="border px-4 py-2 rounded"
+              required
+            />
+            <select
+              id="id_rol"
+              name="id_rol"
+              class="border px-4 py-2 rounded"
+              required
+            >
+              <option value="">Seleccionar Rol</option>
+            </select>
 
-                    <select name="estado" class="border px-4 py-2 rounded" required>
-                        <option value="">Seleccionar Estado</option>
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>
-                    </select>
-                </div>
+            <select
+              id="id_area"
+              name="id_area"
+              class="border px-4 py-2 rounded"
+              required
+            >
+              <option value="">Seleccionar Área</option>
+            </select>
+            <select
+              id="id_cargo"
+              name="id_cargo"
+              class="border px-4 py-2 rounded"
+              required
+            >
+              <option value="">Seleccionar Cargo</option>
+            </select>
 
-                <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
-                    Registrar Usuario
-                </button>
-            </form>
+            <select name="estado" class="border px-4 py-2 rounded" required>
+              <option value="">Seleccionar Estado</option>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+          </div>
 
+          <div class="mt-4 flex justify-between items-center">
+            <button
+              type="submit"
+              class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
+            >
+              Registrar Usuario
+            </button>
+            <button
+              type="button"
+              id="cancelButton"
+              class="bg-gray-300 text-gray-700 px-6 py-2 rounded hover:bg-gray-400"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
 
-
-            <p id="registroMensaje" class="mt-4 text-center text-sm text-gray-600"></p>
-            <button id="closeModal" class="absolute top-2 right-2 text-2xl text-gray-500">&times;</button>
-        </div>
+        <p
+          id="registroMensaje"
+          class="mt-4 text-center text-sm text-gray-600"
+        ></p>
+        <button
+          id="closeModal"
+          class="absolute top-2 right-2 text-2xl text-gray-500"
+        >
+          &times;
+        </button>
+      </div>
     </div>
 
-    <!-- ==================== Scripts ========================= -->
+    <!-- Scripts -->
     <script src="assets/js/main.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!--==================== ionicons ============= -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Iconos -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
 
-
-
-
+    <!-- jQuery y DataTables -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
 
     <script>
-        let TABLA = $('#myTable').DataTable({
-            columnDefs: [
-                { className: 'text-center', targets: '_all' } // Asegura que todas las columnas estén centradas
-            ]
-            // searching: false
+      // Inicialización de DataTable
+      let TABLA = $("#myTable").DataTable({
+        columnDefs: [{ className: "text-center", targets: "_all" }],
+      });
+
+      // Filtros de búsqueda
+      document.querySelector("#nombre").addEventListener("input", function () {
+        if (!this.value.length) {
+          TABLA.search("").columns().search("").draw();
+        }
+      });
+
+      document.querySelector("#correo").addEventListener("input", function () {
+        if (!this.value.length) {
+          TABLA.search("").columns().search("").draw();
+        }
+      });
+
+      document
+        .querySelector("#searchButton")
+        .addEventListener("click", function () {
+          let nombre = document.querySelector("#nombre");
+          let correo = document.querySelector("#correo");
+
+          TABLA.column(1, true, false, true)
+            .search(nombre.value || "")
+            .draw();
+          TABLA.column(5, true, false, true)
+            .search(correo.value || "")
+            .draw();
         });
 
-        document.querySelector('#nombre').addEventListener('input', function (e) {
-            let value = this.value;
-            if (!value.length) {
-                TABLA.search('').columns().search('').draw();
+      // Manejo del modal
+      function openModal() {
+        document.getElementById("registroModal").classList.remove("hidden");
+        cargarRoles();
+      }
+
+      function closeModal() {
+        document.getElementById("registroModal").classList.add("hidden");
+        document.getElementById("registroForm").reset();
+        document.getElementById("registroMensaje").textContent = "";
+      }
+
+      document.getElementById("addButton").addEventListener("click", openModal);
+      document
+        .getElementById("closeModal")
+        .addEventListener("click", closeModal);
+      document
+        .getElementById("cancelButton")
+        .addEventListener("click", closeModal);
+
+      // Cerrar modal haciendo clic fuera
+      window.addEventListener("click", function (e) {
+        if (e.target === document.getElementById("registroModal")) {
+          closeModal();
+        }
+      });
+
+      // Cargar roles desde el backend
+      async function cargarRoles() {
+        try {
+          const response = await fetch("/api/auth/roles");
+          const roles = await response.json();
+
+          const selectRol = document.getElementById("id_rol");
+          selectRol.innerHTML = '<option value="">Seleccionar Rol</option>';
+
+          if (Array.isArray(roles)) {
+            roles.forEach((rol) => {
+              const option = document.createElement("option");
+              option.value = rol.id_rol || rol.id;
+              option.textContent = rol.nombre || rol.nombre_rol;
+              selectRol.appendChild(option);
+            });
+          } else {
+            console.error("Los roles no son una lista válida", roles);
+          }
+        } catch (error) {
+          console.error("Error al cargar los roles:", error);
+        }
+      }
+
+      // Cargar áreas desde el backend
+      async function cargarAreas() {
+        try {
+          const response = await fetch("/api/auth/areas");
+          const areas = await response.json();
+
+          const selectArea = document.getElementById("id_area");
+          selectArea.innerHTML = '<option value="">Seleccionar Área</option>';
+
+          if (Array.isArray(areas)) {
+            areas.forEach((area) => {
+              const option = document.createElement("option");
+              option.value = area.id_area;
+              option.textContent = area.nombre_area;
+              selectArea.appendChild(option);
+            });
+          } else {
+            console.error("Las áreas no son una lista válida", areas);
+          }
+        } catch (error) {
+          console.error("Error al cargar las áreas:", error);
+        }
+      }
+
+      // Cargar cargos desde el backend
+      async function cargarCargos() {
+        try {
+          const response = await fetch("/api/auth/cargos");
+          const cargos = await response.json();
+
+          const selectCargo = document.getElementById("id_cargo");
+          selectCargo.innerHTML = '<option value="">Seleccionar Cargo</option>';
+
+          if (Array.isArray(cargos)) {
+            cargos.forEach((cargo) => {
+              const option = document.createElement("option");
+              option.value = cargo.id_cargo;
+              option.textContent = cargo.nombre_cargo;
+              selectCargo.appendChild(option);
+            });
+          } else {
+            console.error("Los cargos no son una lista válida", cargos);
+          }
+        } catch (error) {
+          console.error("Error al cargar los cargos:", error);
+        }
+      }
+
+      // Listar usuarios
+      async function listarUsuarios() {
+        try {
+          const response = await fetch("/api/auth/usuario");
+          if (!response.ok)
+            throw new Error("No se pudo obtener la lista de usuarios");
+
+          const usuarios = await response.json();
+
+          // Limpiar tabla antes de añadir nuevos datos
+          TABLA.clear();
+
+          if (usuarios && Array.isArray(usuarios)) {
+            usuarios.forEach((usuario) => {
+              TABLA.row.add([
+                usuario.id_usuario,
+                usuario.nombre_completo,
+                usuario.username,
+                usuario.nombre_area,
+                usuario.nombre_cargo,
+                usuario.correo,
+                usuario.celular,
+                usuario.nombre,
+                usuario.estado_app == 1 ? "Activo" : "Inactivo",
+                `<button class="flex items-center gap-2 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded transition" 
+                               onclick="editarUsuario(${usuario.id_usuario})">
+                                <ion-icon name="create-outline" class="text-lg"></ion-icon>
+                                <span>Editar</span>
+                            </button>`,
+              ]);
+            });
+            TABLA.draw();
+          } else {
+            console.error("Los usuarios no son una lista válida", usuarios);
+          }
+        } catch (error) {
+          console.error("Error al cargar los usuarios:", error);
+        }
+      }
+
+      // Función para editar usuario (stub para mantener la funcionalidad)
+      function editarUsuario(id) {
+        console.log(`Editar usuario con ID: ${id}`);
+        // Implementar lógica de edición según sea necesario
+      }
+
+      // Manejar el envío del formulario
+      document
+        .getElementById("registroForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+
+          const data = {
+            nombre_completo: formData.get("nombre").trim(),
+            username: formData.get("username").trim(),
+            correo: formData.get("correo").trim(),
+            celular: formData.get("celular").trim(),
+            password: formData.get("password").trim(),
+            id_rol: parseInt(formData.get("id_rol")),
+            id_area: parseInt(formData.get("id_area")),
+            id_cargo: parseInt(formData.get("id_cargo")),
+            estado_app: formData.get("estado") === "1" ? 1 : 0,
+          };
+
+          console.log(data);
+
+          // Validación para asegurarse de que todos los campos estén llenos
+          if (
+            !data.nombre_completo ||
+            !data.username ||
+            !data.correo ||
+            !data.celular ||
+            !data.password ||
+            !data.id_rol ||
+            !data.id_area ||
+            !data.id_cargo ||
+            !data.estado_app
+          ) {
+            document.getElementById("registroMensaje").textContent =
+              "Todos los campos son obligatorios.";
+            document
+              .getElementById("registroMensaje")
+              .classList.add("text-red-600");
+            return;
+          }
+
+          try {
+            const response = await fetch("/api/auth/registerUsuario", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            const mensaje = document.getElementById("registroMensaje");
+
+            if (response.ok) {
+              mensaje.textContent = "Usuario registrado correctamente";
+              mensaje.classList.remove("text-red-600");
+              mensaje.classList.add("text-green-600");
+              this.reset();
+
+              // Actualizar la lista de usuarios
+              listarUsuarios();
+
+              setTimeout(() => {
+                closeModal();
+              }, 2000);
+            } else {
+              mensaje.textContent =
+                result.message || "Error al registrar usuario";
+              mensaje.classList.remove("text-green-600");
+              mensaje.classList.add("text-red-600");
             }
+          } catch (error) {
+            console.error("Error en el registro:", error);
+            document.getElementById("registroMensaje").textContent =
+              "Error de conexión";
+            document
+              .getElementById("registroMensaje")
+              .classList.add("text-red-600");
+          }
         });
 
-        document.querySelector('#correo').addEventListener('input', function (e) {
-            let value = this.value;
-            if (!value.length) {
-                TABLA.search('').columns().search('').draw();
-            }
-        });
-
-        document.querySelector('#searchButton').addEventListener('click', function (e) {
-            let nombre = document.querySelector('#nombre');
-            let correo = document.querySelector('#correo');
-
-            TABLA.column(2, true, false, true).search(nombre.value || '').draw();
-            TABLA.column(5, true, false, true).search(correo.value || '').draw();
-        });
+      // Inicializar la página
+      document.addEventListener("DOMContentLoaded", function () {
+        listarUsuarios();
+        cargarAreas();
+        cargarCargos();
+      });
     </script>
-
-    <script>
-        // Abrir el modal cuando se haga clic en el botón "Añadir Nuevo"
-        document.getElementById('addButton').addEventListener('click', function () {
-            document.getElementById('registroModal').classList.remove('hidden');
-            cargarRoles(); // Cargar roles cuando se abre el modal
-        });
-
-        // Cargar los roles desde el backend y llenar el select
-        async function cargarRoles() {
-            try {
-                const response = await fetch('/api/auth/roles'); // Asegúrate de que esta URL esté correcta
-                const roles = await response.json(); // Convierte la respuesta en formato JSON
-
-                const selectRol = document.getElementById('id_rol');
-                selectRol.innerHTML = '<option value="">Seleccionar Rol</option>'; // Limpiar opciones anteriores
-
-                // Verificar si roles contiene datos
-                if (Array.isArray(roles)) {
-                    roles.forEach(rol => {
-                        const option = document.createElement('option');
-                        option.value = rol.id_rol || rol.id; // Cambiar a 'rol.id' si es necesario
-                        option.textContent = rol.nombre || rol.nombre_rol; // Cambiar a 'rol.nombre' si es necesario
-                        selectRol.appendChild(option);
-                    });
-                } else {
-                    console.error('Los roles no son una lista válida', roles);
-                }
-            } catch (error) {
-                console.error('Error al cargar los roles:', error);
-            }
-        }
-
-        // Cargar las áreas desde el backend y llenar el select
-        async function cargarAreas() {
-            try {
-                const response = await fetch('/api/auth/areas'); // Asegúrate de que esta URL esté correcta
-                const areas = await response.json(); // Convierte la respuesta en formato JSON
-
-                const selectArea = document.getElementById('id_area');
-                selectArea.innerHTML = '<option value="">Seleccionar Área</option>'; // Limpiar opciones anteriores
-
-                if (Array.isArray(areas)) {
-                    areas.forEach(area => {
-                        const option = document.createElement('option');
-                        option.value = area.id_area; // Utiliza 'id_area' ya que así viene en la respuesta
-                        option.textContent = area.nombre_area; // Utiliza 'nombre_area' ya que así viene en la respuesta
-                        selectArea.appendChild(option);
-                    });
-                } else {
-                    console.error('Las áreas no son una lista válida', areas);
-                }
-            } catch (error) {
-                console.error('Error al cargar las áreas:', error);
-            }
-        }
-
-
-        // Cargar los cargos desde el backend y llenar el select
-        async function cargarCargos() {
-            try {
-                const response = await fetch('/api/auth/cargos'); // Asegúrate de que esta URL esté correcta
-                const cargos = await response.json(); // Convierte la respuesta en formato JSON
-
-                const selectCargo = document.getElementById('id_cargo');
-                selectCargo.innerHTML = '<option value="">Seleccionar Cargo</option>'; // Limpiar opciones anteriores
-
-                if (Array.isArray(cargos)) {
-                    cargos.forEach(cargo => {
-                        const option = document.createElement('option');
-                        option.value = cargo.id_cargo; // Utiliza 'id_cargo' para el valor
-                        option.textContent = cargo.nombre_cargo; // Utiliza 'nombre_cargo' para el texto visible
-                        selectCargo.appendChild(option);
-                    });
-                } else {
-                    console.error('Los cargos no son una lista válida', cargos);
-                }
-            } catch (error) {
-                console.error('Error al cargar los cargos:', error);
-            }
-        }
-
-
-
-        async function listarUsuarios() {
-            try {
-                const response = await fetch('/api/auth/usuario'); // Asegúrate de que esta URL esté correcta
-                if (!response.ok) throw new Error('No se pudo obtener la lista de usuarios');
-
-                const usuarios = await response.json(); // Convierte la respuesta en formato JSON
-
-                if (usuarios && Array.isArray(usuarios)) {
-                    usuarios.forEach(usuario => {
-                        TABLA.row.add([
-                            usuario.id_usuario,
-                            usuario.nombre_completo,
-                            usuario.username,
-                            usuario.nombre_area,
-                            usuario.nombre_cargo,
-                            usuario.correo,
-                            usuario.celular,
-                            usuario.nombre,
-                            usuario.estado_app == 1 ? 'Activo' : 'Inactivo',
-                            `
-                    <button class="flex items-center gap-2 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded transition">
-                        <ion-icon name="create-outline" class="text-lg"></ion-icon> 
-                        <span>Editar</span>
-                    </button>
-                    `
-                        ]);
-                    });
-
-                    TABLA.draw();
-                } else {
-                    console.error('Los usuarios no son una lista válida', usuarios);
-                }
-            } catch (error) {
-                console.error('Error al cargar los usuarios:', error);
-            }
-        }
-
-        // Cerrar el modal si se hace clic fuera del modal
-        window.addEventListener('click', function (e) {
-            if (e.target === document.getElementById('registroModal')) {
-                document.getElementById('registroModal').classList.add('hidden');
-            }
-        });
-
-        // Enviar el formulario de registro
-        document.getElementById('registroForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const formData = new FormData(this);
-            const data = {
-                nombre_completo: formData.get('nombre'),
-                username: formData.get('username'),
-                correo: formData.get('correo'),
-                celular: formData.get('celular'),
-                password: formData.get('password'),
-                id_rol: formData.get('id_rol'),
-                id_area: formData.get('id_area'),
-                id_cargo: formData.get('id_cargo'),
-                estado: formData.get('estado')
-            };
-
-
-            try {
-                const response = await fetch('/api/auth/usuario', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await response.json();
-                const mensaje = document.getElementById('registroMensaje');
-
-                if (response.ok) {
-                    mensaje.textContent = 'Usuario registrado correctamente';
-                    mensaje.classList.remove('text-red-600');
-                    mensaje.classList.add('text-green-600');
-                    this.reset(); // Resetea el formulario
-
-                    setTimeout(() => {
-                        document.getElementById('registroModal').classList.add('hidden'); // Cierra el modal
-                    }, 2000);
-                } else {
-                    mensaje.textContent = result.message || 'Error al registrar usuario';
-                    mensaje.classList.remove('text-green-600');
-                    mensaje.classList.add('text-red-600');
-                }
-            } catch (error) {
-                console.error('Error en el registro:', error);
-            }
-        });
-
-    </script>
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            listarUsuarios();
-            cargarAreas();
-            cargarCargos();
-        });
-    </script>
-</body>
-
+  </body>
 </html>
