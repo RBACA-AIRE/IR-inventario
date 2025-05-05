@@ -25,24 +25,18 @@ export const loginUsuario = async (req, res) => {
       .query("SELECT * FROM Usuario WHERE correo = @correo");
 
     if (result.recordset.length === 0) {
-      console.log("Usuario no encontrado:", correo);
       return res
         .status(401)
         .json({ success: false, message: "Usuario o contraseña incorrectos" });
     }
 
     const usuario = result.recordset[0];
-    console.log(
-      "Contraseña cifrada en base de datos:",
-      usuario.contrasena_encriptada
-    );
 
     // Comparar contraseña
     const coincide = await bcrypt.compare(
       password,
       usuario.contrasena_encriptada
     );
-    console.log("¿Contraseña coincide?", coincide);
 
     if (!coincide) {
       return res
