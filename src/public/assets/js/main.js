@@ -1,21 +1,22 @@
 //agregar clase flotante al elemento de lista seleccionado
-let list = document.querySelectorAll(".navigation li");
+document.addEventListener("DOMContentLoaded", function () {
+    let list = document.querySelectorAll(".navigation li");
 
-function activeLink() {
-    list.forEach(item => {
-        item.classList.remove("hovered");
-    });
-    this.classList.add("hovered");
-}
+    function activeLink() {
+        list.forEach(item => {
+            item.classList.remove("hovered");
+        });
+        this.classList.add("hovered");
+    }
 
-list.forEach(item => item.addEventListener("mouseover", activeLink));
+    list.forEach(item => item.addEventListener("mouseover", activeLink));
 
-//Menu Toggle
-let toggle = document.querySelector(".toggle");
-let navigation = document.querySelector(".navigation");
-let main = document.querySelector(".main");
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
 
-toggle.onclick = function(){
-    navigation.classList.toggle("active");
-    main.classList.toggle("active");
-};
+    toggle.onclick = function () {
+        navigation.classList.toggle("active");
+        main.classList.toggle("active");
+    };
+});

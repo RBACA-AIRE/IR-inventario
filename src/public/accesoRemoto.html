@@ -1,614 +1,490 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Control de Servidores</title>
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css"
-    />
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control de Servidores</title>
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-    <style>
-      .dt-search {
-        display: none;
-      }
-    </style>
-    <!-- ===================Stilos ========================================= -->
-  </head>
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-  <body>
-    <!-- ===============================Navegacion============================ -->
-    <div class="container">
-      <div class="navigation">
-        <ul>
-          <li>
-            <a href="index.html" class="icon-link" title="Intercorp Retail">
-              <img
-                src="assets/imgs/intercorp-azul.ico"
-                alt="Icono"
-                class="icono"
-              />
-              <span class="title">Intercorp Retail</span>
-            </a>
-          </li>
+  <style>
+    .dt-search {
+      display: none;
+    }
+  </style>
+  <!-- ===================Stilos ========================================= -->
+</head>
 
-          <li>
-            <a href="index.html" title="Dashboard">
-              <span class="icon"
-                ><ion-icon name="home-outline"></ion-icon
-              ></span>
-              <span class="title">Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a href="404-page.html" title="Gestión del Negocio">
-              <span class="icon"
-                ><ion-icon name="business-outline"></ion-icon
-              ></span>
-              <span class="title">Gestión del Negocio</span>
-            </a>
-          </li>
-          <li>
-            <a href="register.html" title="Gestión de Usuarios">
-              <span class="icon"
-                ><ion-icon name="people-outline"></ion-icon
-              ></span>
-              <span class="title">Gestión de Usuarios</span>
-            </a>
-          </li>
-          <li>
-            <a href="accesoRemoto.html" title="Accesos Remotos">
-              <span class="icon"
-                ><ion-icon name="desktop-outline"></ion-icon
-              ></span>
-              <span class="title">Accesos Remotos</span>
-            </a>
-          </li>
-          <li>
-            <a href="404-page.html" title="Inventario General">
-              <span class="icon"
-                ><ion-icon name="file-tray-full-outline"></ion-icon
-              ></span>
-              <span class="title">Inventario General</span>
-            </a>
-          </li>
-          <li>
-            <a href="404-page.html" title="Base del Conocimiento">
-              <span class="icon"
-                ><ion-icon name="archive-outline"></ion-icon
-              ></span>
-              <span class="title">Base del Conocimiento</span>
-            </a>
-          </li>
-          <li>
-            <a href="" title="Cerrar Sesión">
-              <span class="icon"
-                ><ion-icon name="exit-outline"></ion-icon
-              ></span>
-              <span class="title">Cerrar Sesión</span>
-            </a>
-          </li>
-        </ul>
+<body>
+  <!-- ===============================Navegacion============================ -->
+  <div class="container">
+    <div class="navigation">
+      <ul>
+        <li>
+          <a href="index.html" class="icon-link" title="Intercorp Retail">
+            <img src="assets/imgs/intercorp-azul.ico" alt="Icono" class="icono" />
+            <span class="title">Intercorp Retail</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html" title="Dashboard">
+            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+            <span class="title">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="404-page.html" title="Gestión del Negocio">
+            <span class="icon"><ion-icon name="business-outline"></ion-icon></span>
+            <span class="title">Gestión del Negocio</span>
+          </a>
+        </li>
+        <li>
+          <a href="register.html" title="Gestión de Usuarios">
+            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+            <span class="title">Gestión de Usuarios</span>
+          </a>
+        </li>
+        <li>
+          <a href="accesoRemoto.html" title="Accesos Remotos">
+            <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
+            <span class="title">Accesos Remotos</span>
+          </a>
+        </li>
+        <li>
+          <a href="404-page.html" title="Inventario General">
+            <span class="icon"><ion-icon name="file-tray-full-outline"></ion-icon></span>
+            <span class="title">Inventario General</span>
+          </a>
+        </li>
+        <li>
+          <a href="404-page.html" title="Base del Conocimiento">
+            <span class="icon"><ion-icon name="archive-outline"></ion-icon></span>
+            <span class="title">Base del Conocimiento</span>
+          </a>
+        </li>
+        <li>
+          <a href="" title="Cerrar Sesión">
+            <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
+            <span class="title">Cerrar Sesión</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================================ Main ===============================================-->
+  <div class="main">
+    <div class="topbar">
+      <div class="toggle">
+        <ion-icon name="menu-outline"></ion-icon>
+      </div>
+      <div class="user">
+        <img src="assets/imgs/customer01.jpg" alt="" />
       </div>
     </div>
 
-    <!-- ================================ Main ===============================================-->
-    <div class="main">
-      <div class="topbar">
-        <div class="toggle">
-          <ion-icon name="menu-outline"></ion-icon>
-        </div>
-        <!-- <div class="search">
-                <label>
-                    <input type="text" placeholder="Search here">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
-            </div> -->
-        <div class="user">
-          <img src="assets/imgs/customer01.jpg" alt="" />
-        </div>
-      </div>
 
-      <!-- ==================================tabla de registro ========================== -->
-      <div class="container min-w-full p-4">
-        <!-- Barra superior con filtros -->
-        <div class="flex justify-between items-center mb-6">
-          <!-- Título -->
-          <h1 class="text-2xl font-semibold text-gray-700">Accesos Remotos</h1>
-          <button class="text-blue-500 text-2xl"></button>
-          <div class="flex space-x-2">
-            <input
-              type="text"
-              id="Hostname"
-              class="border border-gray-300 rounded px-4 py-2"
-              placeholder="Hostname"
-            />
-            <input
-              type="text"
-              id="ip"
-              class="border border-gray-300 rounded px-4 py-2"
-              placeholder="IP"
-            />
-            <button
-              id="searchButton"
-              class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
-            >
-              Buscar
-            </button>
-            <button
-              id="addButton"
-              class="bg-green-500 text-white px-4 py-2 rounded"
-            >
-              Añadir Nuevo
-            </button>
-          </div>
-        </div>
-
-        <!-- Tabla -->
-        <div class="overflow-x-auto">
-          <table
-            class="min-w-full bg-white border border-gray-300"
-            id="myTable"
-          >
-            <thead>
-              <tr class="bg-blue-600 text-white">
-                <th class="py-2 px-4 border border-gray-300" rowspan="2">ID</th>
-                <th class="py-2 px-4 border border-gray-300" colspan="7">
-                  CONEXIÓN PREVIA (OPC.)
-                </th>
-                <th class="py-2 px-4 border border-gray-300" colspan="2">
-                  U. ADMIN. DE S.O.
-                </th>
-                <th class="py-2 px-4 border border-gray-300" colspan="2">
-                  U. ADMIN DE BD
-                </th>
-                <th class="py-2 px-4 border border-gray-300" colspan="2">
-                  U. APLICACION
-                </th>
-                <th class="py-2 px-4 border border-gray-300" rowspan="2">
-                  ESTADO
-                </th>
-                <th class="py-2 px-4 border border-gray-300" rowspan="2">
-                  EDITAR
-                </th>
-              </tr>
-              <tr class="bg-blue-600 text-white">
-                <!-- 7 columnas de CONEXIÓN PREVIA -->
-                <th class="py-2 px-4 border border-gray-300">Hostname</th>
-                <th class="py-2 px-4 border border-gray-300">IP</th>
-                <th class="py-2 px-4 border border-gray-300">S.O.</th>
-                <th class="py-2 px-4 border border-gray-300">Sistema</th>
-                <th class="py-2 px-4 border border-gray-300">UUNN</th>
-                <th class="py-2 px-4 border border-gray-300">Ambiente</th>
-                <th class="py-2 px-4 border border-gray-300">Acceso</th>
-                <!-- 2 columnas de USUARIO DE S.O -->
-                <th class="py-2 px-4 border border-gray-300">USUARIO</th>
-                <th class="py-2 px-4 border border-gray-300">CONTRASEÑA</th>
-                <!-- 2 columnas de USUARIO BD -->
-                <th class="py-2 px-4 border border-gray-300">USUARIO</th>
-                <th class="py-2 px-4 border border-gray-300">CONTRASEÑA</th>
-                <!-- 2 columnas de USUARIO APP -->
-                <th class="py-2 px-4 border border-gray-300">USUARIO</th>
-                <th class="py-2 px-4 border border-gray-300">CONTRASEÑA</th>
-              </tr>
-            </thead>
-            <tbody id="myTableBody">
-              <!-- Aquí se insertarán los datos dinámicamente -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <!-- ============================ lista de detalles del pedido ===================== -->
-    </div>
-
-    <!-- Modal de Registro -->
-    <div
-      id="registroModal"
-      class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center hidden"
-    >
-      <div
-        class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl relative overflow-y-auto max-h-screen"
-      >
-        <h2 class="text-2xl font-semibold mb-4">Registrar Acceso Remoto</h2>
-        <form id="registroForm">
-          <!-- Datos generales -->
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <input
-              type="text"
-              name="hostname"
-              placeholder="Hostname"
-              class="border px-4 py-2 rounded"
-              required
-            />
-            <input
-              type="text"
-              name="ip"
-              placeholder="IP"
-              class="border px-4 py-2 rounded"
-              required
-            />
-            <input
-              type="text"
-              name="SistemaOperativo"
-              placeholder="Sistema O."
-              class="border px-4 py-2 rounded"
-              required
-            />
-            <select
-              id="id_sistema"
-              name="id_sistema"
-              class="border px-4 py-2 rounded"
-              required
-            >
-              <option value="">Seleccionar Sistemas I.</option>
-            </select>
-            <select
-              id="id_uunn"
-              name="id_uunn"
-              class="border px-4 py-2 rounded"
-              required
-            >
-              <option value="">Selecionar UUNN</option>
-            </select>
-            <select
-              id="id_ambiente"
-              name="id_ambiente"
-              class="border px-4 py-2 rounded"
-              required
-            >
-              <option value="">Selecionar Ambiente</option>
-            </select>
-            <select
-              id="id_tipo_acceso"
-              name="id_tipo_acceso"
-              class="border px-4 py-2 rounded"
-              required
-            >
-              <option value="">Seleccionar Tipo de Conexión</option>
-            </select>
-            <select name="estado" class="border px-4 py-2 rounded" required>
-              <option value="">Seleccionar Estado</option>
-              <option value="1">Activo</option>
-              <option value="0">Inactivo</option>
-            </select>
-          </div>
-
-          <!-- Credenciales de Sistema Operativo -->
-          <h3 class="text-lg font-semibold mb-2">Credenciales de S.O:</h3>
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <input
-              type="text"
-              name="usuario_so"
-              placeholder="Usuario S.O."
-              class="border px-4 py-2 rounded"
-            />
-            <input
-              type="password"
-              name="password_so"
-              placeholder="Contraseña S.O."
-              class="border px-4 py-2 rounded"
-            />
-          </div>
-
-          <!-- Título con switch al lado -->
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-lg font-semibold">Credenciales de BD:</h3>
-            <!-- From Uiverse.io by Shoh2008 -->
-            <div class="checkbox-wrapper-5">
-              <div class="check">
-                <input id="toggle-credenciales"
-                name="toggle-credenciales" type="checkbox" />
-                <label for="toggle-credenciales"></label>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bloque de inputs oculto inicialmente -->
-          <div id="credenciales-bd" class="grid grid-cols-2 gap-4 mb-4 hidden">
-            <input
-              type="text"
-              name="usuario_bd"
-              placeholder="Usuario BD"
-              class="border px-4 py-2 rounded"
-            />
-            <input
-              type="password"
-              name="password_bd"
-              placeholder="Contraseña BD"
-              class="border px-4 py-2 rounded"
-            />
-          </div>
-
-          <script>
-            const toggle = document.getElementById("toggle-credenciales");
-            const bloque = document.getElementById("credenciales-bd");
-
-            toggle.addEventListener("change", () => {
-              bloque.classList.toggle("hidden", !toggle.checked);
-            });
-          </script>
-
-          <!-- Credenciales de Aplicación -->
-          <!-- Título con switch al lado -->
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-lg font-semibold">Credenciales de APP:</h3>
-            <!-- From Uiverse.io by Shoh2008 -->
-            <div class="checkbox-wrapper-5">
-              <div class="check">
-                <input id="toggle-app" name="toggle-app" type="checkbox" />
-                <label for="toggle-app"></label>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bloque de inputs oculto inicialmente -->
-          <div id="credenciales-app" class="grid grid-cols-2 gap-4 mb-4 hidden">
-            <input
-              type="text"
-              name="usuario_app"
-              placeholder="Usuario APP"
-              class="border px-4 py-2 rounded"
-            />
-            <input
-              type="password"
-              name="password_app"
-              placeholder="Contraseña APP"
-              class="border px-4 py-2 rounded"
-            />
-          </div>
-
-          <script>
-            const toggleApp = document.getElementById("toggle-app");
-            const bloqueApp = document.getElementById("credenciales-app");
-
-            toggleApp.addEventListener("change", () => {
-              bloqueApp.classList.toggle("hidden", !toggleApp.checked);
-            });
-          </script>
-
-          <button
-            type="submit"
-            class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
-          >
-            Registrar Acceso Remoto
+    <!-- ==================================tabla de registro ========================== -->
+    <div class="container min-w-full p-4">
+      <!-- Barra superior con filtros -->
+      <div class="flex justify-between items-center mb-6">
+        <!-- Título -->
+        <h1 class="text-2xl font-semibold text-gray-700">Accesos Remotos</h1>
+        <button class="text-blue-500 text-2xl"></button>
+        <div class="flex space-x-2">
+          <input type="text" id="Hostname" class="border border-gray-300 rounded px-4 py-2" placeholder="Hostname" />
+          <input type="text" id="ip" class="border border-gray-300 rounded px-4 py-2" placeholder="IP" />
+          <button id="searchButton" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+            Buscar
           </button>
-        </form>
+          <button id="addButton" class="bg-green-500 text-white px-4 py-2 rounded">
+            Añadir Nuevo
+          </button>
+        </div>
+      </div>
 
-        <p
-          id="registroMensaje"
-          class="mt-4 text-center text-sm text-gray-600"
-        ></p>
-        <button
-          id="closeModal"
-          class="absolute top-2 right-2 text-2xl text-gray-500"
-        >
-          &times;
-        </button>
+      <!-- Tabla -->
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300" id="myTable">
+          <thead>
+            <tr class="bg-blue-600 text-white">
+              <th class="py-2 px-4 border border-gray-300" rowspan="2">ID</th>
+              <th class="py-2 px-4 border border-gray-300" colspan="7">
+                CONEXIÓN PREVIA (OPC.)
+              </th>
+              <th class="py-2 px-4 border border-gray-300" colspan="2">
+                U. ADMIN. DE S.O.
+              </th>
+              <th class="py-2 px-4 border border-gray-300" colspan="2">
+                U. ADMIN DE BD
+              </th>
+              <th class="py-2 px-4 border border-gray-300" colspan="2">
+                U. APLICACION
+              </th>
+              <th class="py-2 px-4 border border-gray-300" rowspan="2">
+                ESTADO
+              </th>
+              <th class="py-2 px-4 border border-gray-300" rowspan="2">
+                EDITAR
+              </th>
+            </tr>
+            <tr class="bg-blue-600 text-white">
+              <!-- 7 columnas de CONEXIÓN PREVIA -->
+              <th class="py-2 px-4 border border-gray-300">Hostname</th>
+              <th class="py-2 px-4 border border-gray-300">IP</th>
+              <th class="py-2 px-4 border border-gray-300">S.O.</th>
+              <th class="py-2 px-4 border border-gray-300">Sistema</th>
+              <th class="py-2 px-4 border border-gray-300">UUNN</th>
+              <th class="py-2 px-4 border border-gray-300">Ambiente</th>
+              <th class="py-2 px-4 border border-gray-300">Acceso</th>
+              <!-- 2 columnas de USUARIO DE S.O -->
+              <th class="py-2 px-4 border border-gray-300">USUARIO</th>
+              <th class="py-2 px-4 border border-gray-300">CONTRASEÑA</th>
+              <!-- 2 columnas de USUARIO BD -->
+              <th class="py-2 px-4 border border-gray-300">USUARIO</th>
+              <th class="py-2 px-4 border border-gray-300">CONTRASEÑA</th>
+              <!-- 2 columnas de USUARIO APP -->
+              <th class="py-2 px-4 border border-gray-300">USUARIO</th>
+              <th class="py-2 px-4 border border-gray-300">CONTRASEÑA</th>
+            </tr>
+          </thead>
+          <tbody id="myTableBody">
+            <!-- Aquí se insertarán los datos dinámicamente -->
+          </tbody>
+        </table>
       </div>
     </div>
+    <!-- ============================ lista de detalles del pedido ===================== -->
+  </div>
 
-    <!-- ==================== Scripts ========================= -->
-    <script src="assets/js/main.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Modal de Registro -->
+  <div id="registroModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl relative overflow-y-auto max-h-screen">
+      <h2 class="text-2xl font-semibold mb-4">Registrar Acceso Remoto</h2>
+      <form id="registroForm">
+        <!-- Datos generales -->
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <input type="text" name="hostname" placeholder="Hostname" class="border px-4 py-2 rounded" required />
+          <input type="text" name="ip" placeholder="IP" class="border px-4 py-2 rounded" required />
+          <input type="text" name="SistemaOperativo" placeholder="Sistema O." class="border px-4 py-2 rounded"
+            required />
+          <select id="id_sistema" name="id_sistema" class="border px-4 py-2 rounded" required>
+            <option value="">Seleccionar Sistemas I.</option>
+          </select>
+          <select id="id_uunn" name="id_uunn" class="border px-4 py-2 rounded" required>
+            <option value="">Selecionar UUNN</option>
+          </select>
+          <select id="id_ambiente" name="id_ambiente" class="border px-4 py-2 rounded" required>
+            <option value="">Selecionar Ambiente</option>
+          </select>
+          <select id="id_tipo_acceso" name="id_tipo_acceso" class="border px-4 py-2 rounded" required>
+            <option value="">Seleccionar Tipo de Conexión</option>
+          </select>
+          <select name="estado" class="border px-4 py-2 rounded" required>
+            <option value="">Seleccionar Estado</option>
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+          </select>
+        </div>
 
-    <!--==================== ionicons ============= -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
+        <!-- Credenciales de Sistema Operativo -->
+        <h3 class="text-lg font-semibold mb-2">Credenciales de S.O:</h3>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <input type="text" name="usuario_so" placeholder="Usuario S.O." class="border px-4 py-2 rounded" />
+          <input type="password" name="password_so" placeholder="Contraseña S.O." class="border px-4 py-2 rounded" />
+        </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+        <!-- Título con switch al lado -->
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-lg font-semibold">Credenciales de BD:</h3>
+          <!-- From Uiverse.io by Shoh2008 -->
+          <div class="checkbox-wrapper-5">
+            <div class="check">
+              <input id="toggle-credenciales" name="toggle-credenciales" type="checkbox" />
+              <label for="toggle-credenciales"></label>
+            </div>
+          </div>
+        </div>
 
-    <script>
-      // Inicializa DataTable
-      let TABLA = $("#myTable").DataTable({
-        columnDefs: [
-          { className: "text-center", targets: "_all" }, // Asegura que todas las columnas estén centradas
-        ],
+        <!-- Bloque de inputs oculto inicialmente -->
+        <div id="credenciales-bd" class="grid grid-cols-2 gap-4 mb-4 hidden">
+          <input type="text" name="usuario_bd" placeholder="Usuario BD" class="border px-4 py-2 rounded" />
+          <input type="password" name="password_bd" placeholder="Contraseña BD" class="border px-4 py-2 rounded" />
+        </div>
+
+        <script>
+          const toggle = document.getElementById("toggle-credenciales");
+          const bloque = document.getElementById("credenciales-bd");
+
+          toggle.addEventListener("change", () => {
+            bloque.classList.toggle("hidden", !toggle.checked);
+          });
+        </script>
+
+        <!-- Credenciales de Aplicación -->
+        <!-- Título con switch al lado -->
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-lg font-semibold">Credenciales de APP:</h3>
+          <!-- From Uiverse.io by Shoh2008 -->
+          <div class="checkbox-wrapper-5">
+            <div class="check">
+              <input id="toggle-app" name="toggle-app" type="checkbox" />
+              <label for="toggle-app"></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloque de inputs oculto inicialmente -->
+        <div id="credenciales-app" class="grid grid-cols-2 gap-4 mb-4 hidden">
+          <input type="text" name="usuario_app" placeholder="Usuario APP" class="border px-4 py-2 rounded" />
+          <input type="password" name="password_app" placeholder="Contraseña APP" class="border px-4 py-2 rounded" />
+        </div>
+
+        <script>
+          const toggleApp = document.getElementById("toggle-app");
+          const bloqueApp = document.getElementById("credenciales-app");
+
+          toggleApp.addEventListener("change", () => {
+            bloqueApp.classList.toggle("hidden", !toggleApp.checked);
+          });
+        </script>
+
+        <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
+          Registrar Acceso Remoto
+        </button>
+      </form>
+
+      <p id="registroMensaje" class="mt-4 text-center text-sm text-gray-600"></p>
+      <button id="closeModal" class="absolute top-2 right-2 text-2xl text-gray-500">
+        &times;
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== Scripts ========================= -->
+  <script src="assets/js/main.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!--==================== ionicons ============= -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+
+  <script>
+    // Inicializa DataTable
+    let TABLA = $("#myTable").DataTable({
+      columnDefs: [
+        { className: "text-center", targets: "_all" }, // Asegura que todas las columnas estén centradas
+      ],
+    });
+    // Actualiza el contador de accesos remotos visibles
+    function actualizarContadorAccesos() {
+      const total = TABLA.rows({ filter: "applied" }).count();
+      document.getElementById("contadorAccesos").textContent = total;
+    }
+
+    // Llama al botón de búsqueda
+    document
+      .querySelector("#searchButton")
+      .addEventListener("click", function () {
+        let hostname = document.querySelector("#Hostname").value;
+        let ip = document.querySelector("#ip").value;
+
+        // Aplica el filtro a las columnas específicas
+        TABLA.columns(1)
+          .search(hostname || "") // Filtra por la columna del Hostname (columna 1)
+          .columns(2)
+          .search(ip || "") // Filtra por la columna de IP (columna 2)
+          .draw(); // Redibuja la tabla con los filtros aplicados
       });
 
-      // Llama al botón de búsqueda
-      document
-        .querySelector("#searchButton")
-        .addEventListener("click", function () {
-          let hostname = document.querySelector("#Hostname").value;
-          let ip = document.querySelector("#ip").value;
-
-          // Aplica el filtro a las columnas específicas
-          TABLA.columns(1)
-            .search(hostname || "") // Filtra por la columna del Hostname (columna 1)
-            .columns(2)
-            .search(ip || "") // Filtra por la columna de IP (columna 2)
-            .draw(); // Redibuja la tabla con los filtros aplicados
-        });
-
-      // Opción de búsqueda en tiempo real si deseas (opcional)
-      document
-        .querySelector("#Hostname")
-        .addEventListener("input", function () {
-          TABLA.columns(1).search(this.value).draw();
-        });
-
-      document.querySelector("#ip").addEventListener("input", function () {
-        TABLA.columns(2).search(this.value).draw();
+    // Opción de búsqueda en tiempo real si deseas (opcional)
+    document
+      .querySelector("#Hostname")
+      .addEventListener("input", function () {
+        TABLA.columns(1).search(this.value).draw();
       });
-    </script>
 
-    <script>
-      document
-        .getElementById("addButton")
-        .addEventListener("click", function () {
-          document.getElementById("registroModal").classList.remove("hidden");
-          cargarSistemas();
-          cargarAmbientes();
-          cargarTipoAccesos();
-          cargarUUNN();
-        });
+    document.querySelector("#ip").addEventListener("input", function () {
+      TABLA.columns(2).search(this.value).draw();
+    });
+  </script>
 
-      async function cargarSistemas() {
-        try {
-          const response = await fetch("/api/accesos/sistemas");
-          const sistemas = await response.json();
-          const selectSistema = document.getElementById("id_sistema");
-          selectSistema.innerHTML =
-            '<option value="">Seleccionar Sistema I.</option>';
+  <script>
+    document
+      .getElementById("addButton")
+      .addEventListener("click", function () {
+        document.getElementById("registroModal").classList.remove("hidden");
+        cargarSistemas();
+        cargarAmbientes();
+        cargarTipoAccesos();
+        cargarUUNN();
+      });
 
-          if (Array.isArray(sistemas)) {
-            sistemas.forEach((sistema) => {
-              const option = document.createElement("option");
-              option.value = sistema.id_sistema;
-              option.textContent = sistema.nombre;
-              selectSistema.appendChild(option);
-            });
-          } else {
-            console.error("Los sistemas no son una lista válida", sistemas);
-          }
-        } catch (error) {
-          console.error("Error al cargar los sistemas:", error);
+    async function cargarSistemas() {
+      try {
+        const response = await fetch("/api/accesos/sistemas");
+        const sistemas = await response.json();
+        const selectSistema = document.getElementById("id_sistema");
+        selectSistema.innerHTML =
+          '<option value="">Seleccionar Sistema I.</option>';
+
+        if (Array.isArray(sistemas)) {
+          sistemas.forEach((sistema) => {
+            const option = document.createElement("option");
+            option.value = sistema.id_sistema;
+            option.textContent = sistema.nombre;
+            selectSistema.appendChild(option);
+          });
+        } else {
+          console.error("Los sistemas no son una lista válida", sistemas);
         }
+      } catch (error) {
+        console.error("Error al cargar los sistemas:", error);
       }
+    }
 
-      async function cargarAmbientes() {
-        try {
-          const response = await fetch("/api/accesos/ambientes");
-          const ambientes = await response.json();
-          const selectAmbiente = document.getElementById("id_ambiente");
-          selectAmbiente.innerHTML =
-            '<option value="">Seleccionar Ambiente</option>';
+    async function cargarAmbientes() {
+      try {
+        const response = await fetch("/api/accesos/ambientes");
+        const ambientes = await response.json();
+        const selectAmbiente = document.getElementById("id_ambiente");
+        selectAmbiente.innerHTML =
+          '<option value="">Seleccionar Ambiente</option>';
 
-          if (Array.isArray(ambientes)) {
-            ambientes.forEach((ambiente) => {
-              const option = document.createElement("option");
-              option.value = ambiente.id_ambiente;
-              option.textContent = ambiente.nombre;
-              selectAmbiente.appendChild(option);
-            });
-          } else {
-            console.error("Los ambientes no son una lista válida", ambientes);
-          }
-        } catch (error) {
-          console.error("Error al cargar los ambientes:", error);
+        if (Array.isArray(ambientes)) {
+          ambientes.forEach((ambiente) => {
+            const option = document.createElement("option");
+            option.value = ambiente.id_ambiente;
+            option.textContent = ambiente.nombre;
+            selectAmbiente.appendChild(option);
+          });
+        } else {
+          console.error("Los ambientes no son una lista válida", ambientes);
         }
+      } catch (error) {
+        console.error("Error al cargar los ambientes:", error);
       }
+    }
 
-      async function cargarTipoAccesos() {
-        try {
-          const response = await fetch("/api/accesos/tipoconexion");
-          const accesos = await response.json();
-          const selectAcceso = document.getElementById("id_tipo_acceso");
-          selectAcceso.innerHTML =
-            '<option value="">Seleccionar Tipo de Acceso</option>';
+    async function cargarTipoAccesos() {
+      try {
+        const response = await fetch("/api/accesos/tipoconexion");
+        const accesos = await response.json();
+        const selectAcceso = document.getElementById("id_tipo_acceso");
+        selectAcceso.innerHTML =
+          '<option value="">Seleccionar Tipo de Acceso</option>';
 
-          if (Array.isArray(accesos)) {
-            accesos.forEach((acceso) => {
-              const option = document.createElement("option");
-              option.value = acceso.id_tipo_acceso;
-              option.textContent = acceso.nombre;
-              selectAcceso.appendChild(option);
-            });
-          } else {
-            console.error(
-              "Los tipos de acceso no son una lista válida",
-              accesos
-            );
-          }
-        } catch (error) {
-          console.error("Error al cargar los tipos de acceso:", error);
+        if (Array.isArray(accesos)) {
+          accesos.forEach((acceso) => {
+            const option = document.createElement("option");
+            option.value = acceso.id_tipo_acceso;
+            option.textContent = acceso.nombre;
+            selectAcceso.appendChild(option);
+          });
+        } else {
+          console.error(
+            "Los tipos de acceso no son una lista válida",
+            accesos
+          );
         }
+      } catch (error) {
+        console.error("Error al cargar los tipos de acceso:", error);
       }
+    }
 
-      async function cargarUUNN() {
-        try {
-          const response = await fetch("/api/accesos/unidadnegocio");
-          const unidades = await response.json();
-          const selectUUNN = document.getElementById("id_uunn");
-          selectUUNN.innerHTML =
-            '<option value="">Seleccionar Unidad de Negocio</option>';
+    async function cargarUUNN() {
+      try {
+        const response = await fetch("/api/accesos/unidadnegocio");
+        const unidades = await response.json();
+        const selectUUNN = document.getElementById("id_uunn");
+        selectUUNN.innerHTML =
+          '<option value="">Seleccionar Unidad de Negocio</option>';
 
-          if (Array.isArray(unidades)) {
-            unidades.forEach((unidad) => {
-              const option = document.createElement("option");
-              option.value = unidad.id_uunn;
-              option.textContent = unidad.nombre;
-              selectUUNN.appendChild(option);
-            });
-          } else {
-            console.error(
-              "Las unidades de negocio no son una lista válida",
-              unidades
-            );
-          }
-        } catch (error) {
-          console.error("Error al cargar las unidades de negocio:", error);
+        if (Array.isArray(unidades)) {
+          unidades.forEach((unidad) => {
+            const option = document.createElement("option");
+            option.value = unidad.id_uunn;
+            option.textContent = unidad.nombre;
+            selectUUNN.appendChild(option);
+          });
+        } else {
+          console.error(
+            "Las unidades de negocio no son una lista válida",
+            unidades
+          );
         }
+      } catch (error) {
+        console.error("Error al cargar las unidades de negocio:", error);
       }
+    }
 
-      async function listarAccesos() {
-        try {
-          const response = await fetch("/api/accesos/accesos");
-          if (!response.ok)
-            throw new Error("No se pudo obtener la lista de accesos");
-          const accesos = await response.json();
+    async function listarAccesos() {
+      try {
+        const response = await fetch("/api/accesos/accesos");
+        if (!response.ok)
+          throw new Error("No se pudo obtener la lista de accesos");
+        const accesos = await response.json();
 
-          if (accesos && Array.isArray(accesos)) {
-            TABLA.clear();
-            accesos.forEach((acceso) => {
-              TABLA.row.add([
-                acceso.Id,
-                acceso.NombreServidor,
-                acceso.DireccionIP,
-                acceso.SistemaOperativo,
-                acceso.SistemaNombre,
-                acceso.UnidadNegocio,
-                acceso.Ambiente,
-                acceso.TipoAcceso,
-                acceso.UsuarioCredencial,
-                generarCampoPassword(acceso.ContrasenaEncriptada),
-                acceso.UsuarioCredencialDB,
-                generarCampoPassword(acceso.ContrasenaEncriptadaDB),
-                acceso.UsuarioCredencialApp,
-                generarCampoPassword(acceso.ContrasenaEncriptadaApp),
-                acceso.EstadoCredencial == 1 ? "Activo" : "Inactivo",
-                `<button class="flex items-center gap-2 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded transition">
-                            <ion-icon name="create-outline" class="text-lg"></ion-icon> 
-                            <span>Editar</span>
-                        </button>`,
-              ]);
-            });
-            TABLA.draw();
-          } else {
-            console.error("Los accesos no son una lista válida");
-          }
-        } catch (error) {
-          console.error("Error al cargar los accesos:", error);
+        if (accesos && Array.isArray(accesos)) {
+          TABLA.clear();
+          accesos.forEach((acceso) => {
+            TABLA.row.add([
+              acceso.Id,
+              acceso.NombreServidor,
+              acceso.DireccionIP,
+              acceso.SistemaOperativo,
+              acceso.SistemaNombre,
+              acceso.UnidadNegocio,
+              acceso.Ambiente,
+              acceso.TipoAcceso,
+              acceso.UsuarioCredencial,
+              generarCampoPassword(acceso.ContrasenaEncriptada),
+              acceso.UsuarioCredencialDB,
+              generarCampoPassword(acceso.ContrasenaEncriptadaDB),
+              acceso.UsuarioCredencialApp,
+              generarCampoPassword(acceso.ContrasenaEncriptadaApp),
+              acceso.EstadoCredencial == 1 ? "Activo" : "Inactivo",
+              `<div style="display: flex; justify-content: center; align-items: center;">
+                <button class="editBtn" onclick="editarUsuario(${acceso.Id})">
+                <svg height="1em" viewBox="0 0 512 512">
+                  <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 
+                    89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 
+                    480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 
+                    27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 
+                    452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 
+                    33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 
+                    14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 
+                    0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 
+                    16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
+                  </path>
+                </svg>
+              </button>
+            </div>`,
+            ]);
+          });
+          TABLA.draw();
+        } else {
+          console.error("Los accesos no son una lista válida");
         }
+      } catch (error) {
+        console.error("Error al cargar los accesos:", error);
       }
+    }
 
-      function generarCampoPassword(valor) {
-        const idCampo = `campo_${Math.random().toString(36).substring(2, 10)}`;
-        const oculto = "••••••••";
+    function generarCampoPassword(valor) {
+      const idCampo = `campo_${Math.random().toString(36).substring(2, 10)}`;
+      const oculto = "••••••••";
 
-        return ` 
+      return ` 
             <div class="flex items-center gap-2">
                 <span id="${idCampo}" class="font-mono">${oculto}</span>
                 <button 
@@ -620,110 +496,111 @@
                 </button>
             </div>
         `;
+    }
+
+    function togglePassword(idCampo, valor, boton) {
+      const campo = document.getElementById(idCampo);
+      const icono = boton.querySelector("ion-icon");
+      const mostrando = campo.textContent === "••••••••";
+      icono.classList.add("eye-blink");
+
+      setTimeout(() => {
+        campo.textContent = mostrando ? valor : "••••••••";
+        icono.setAttribute(
+          "name",
+          mostrando ? "eye-off-outline" : "eye-outline"
+        );
+        boton.setAttribute(
+          "title",
+          mostrando ? "Ocultar contraseña" : "Mostrar contraseña"
+        );
+        icono.classList.remove("eye-blink");
+      }, 200);
+    }
+
+    window.addEventListener("click", function (e) {
+      if (e.target === document.getElementById("registroModal")) {
+        document.getElementById("registroModal").classList.add("hidden");
       }
+    });
 
-      function togglePassword(idCampo, valor, boton) {
-        const campo = document.getElementById(idCampo);
-        const icono = boton.querySelector("ion-icon");
-        const mostrando = campo.textContent === "••••••••";
-        icono.classList.add("eye-blink");
+    document
+      .getElementById("registroForm")
+      .addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
 
-        setTimeout(() => {
-          campo.textContent = mostrando ? valor : "••••••••";
-          icono.setAttribute(
-            "name",
-            mostrando ? "eye-off-outline" : "eye-outline"
-          );
-          boton.setAttribute(
-            "title",
-            mostrando ? "Ocultar contraseña" : "Mostrar contraseña"
-          );
-          icono.classList.remove("eye-blink");
-        }, 200);
-      }
+        const data = {
+          Id: null,
+          NombreServidor: formData.get("hostname"),
+          DireccionIP: formData.get("ip"),
+          SistemaOperativo: formData.get("SistemaOperativo"),
+          SistemaNombre: formData.get("id_sistema"),
+          UnidadNegocio: formData.get("id_uunn"),
+          Ambiente: formData.get("id_ambiente"),
+          TipoAcceso: formData.get("id_tipo_acceso"),
+          EstadoCredencial: formData.get("estado"),
 
-      window.addEventListener("click", function (e) {
-        if (e.target === document.getElementById("registroModal")) {
-          document.getElementById("registroModal").classList.add("hidden");
-        }
-      });
+          UsuarioCredencial: formData.get("usuario_so"),
+          ContrasenaEncriptada: formData.get("password_so"),
 
-      document
-        .getElementById("registroForm")
-        .addEventListener("submit", async function (e) {
-          e.preventDefault();
-          const formData = new FormData(this);
-
-          const data = {
-            Id: null,
-            NombreServidor: formData.get("hostname"),
-            DireccionIP: formData.get("ip"),
-            SistemaOperativo: formData.get("SistemaOperativo"),
-            SistemaNombre: formData.get("id_sistema"),
-            UnidadNegocio: formData.get("id_uunn"),
-            Ambiente: formData.get("id_ambiente"),
-            TipoAcceso: formData.get("id_tipo_acceso"),
-            EstadoCredencial: formData.get("estado"),
-
-            UsuarioCredencial: formData.get("usuario_so"),
-            ContrasenaEncriptada: formData.get("password_so"),
-            
-            UsuarioCredencialDB: formData.get("usuario_bd"),
-            ContrasenaEncriptadaDB: formData.get("password_bd"),
-            EstadoCredencialDB: formData.get("toggle-credenciales"),
+          UsuarioCredencialDB: formData.get("usuario_bd"),
+          ContrasenaEncriptadaDB: formData.get("password_bd"),
+          EstadoCredencialDB: formData.get("toggle-credenciales"),
 
 
-            UsuarioCredencialApp: formData.get("usuario_app"),
-            ContrasenaEncriptadaApp: formData.get("password_app"),
-            EstadoCredencialApp: formData.get("toggle-app")
-          };
-          try {
-            const response = await fetch("/api/accesos/accesos", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            });
+          UsuarioCredencialApp: formData.get("usuario_app"),
+          ContrasenaEncriptadaApp: formData.get("password_app"),
+          EstadoCredencialApp: formData.get("toggle-app")
+        };
+        try {
+          const response = await fetch("/api/accesos/accesos", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
 
-            const result = await response.json();
-            const mensaje = document.getElementById("registroMensaje");
+          const result = await response.json();
+          const mensaje = document.getElementById("registroMensaje");
 
-            if (response.ok) {
-              mensaje.textContent = "Acceso registrado correctamente";
-              mensaje.classList.remove("text-red-600");
-              mensaje.classList.add("text-green-600");
-              this.reset();
+          if (response.ok) {
+            mensaje.textContent = "Acceso registrado correctamente";
+            mensaje.classList.remove("text-red-600");
+            mensaje.classList.add("text-green-600");
+            this.reset();
 
-              // listar accesos remotos
-              listarAccesos();
-              setTimeout(() => {
-                document
-                  .getElementById("registroModal")
-                  .classList.add("hidden");
-              }, 2000);
-            } else {
-              mensaje.textContent =
-                result.message || "Error al registrar acceso";
-              mensaje.classList.remove("text-green-600");
-              mensaje.classList.add("text-red-600");
-            }
-          } catch (error) {
-            console.error("Error en el registro:", error);
-            const mensaje = document.getElementById("registroMensaje");
-            mensaje.textContent = "Ocurrió un error en la petición.";
+            // listar accesos remotos
+            listarAccesos();
+            setTimeout(() => {
+              document
+                .getElementById("registroModal")
+                .classList.add("hidden");
+            }, 2000);
+          } else {
+            mensaje.textContent =
+              result.message || "Error al registrar acceso";
             mensaje.classList.remove("text-green-600");
             mensaje.classList.add("text-red-600");
           }
-        });
-    </script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        listarAccesos();
-        cargarAmbientes();
-        cargarSistemas();
-        cargarTipoAccesos();
-        cargarUUNN();
+        } catch (error) {
+          console.error("Error en el registro:", error);
+          const mensaje = document.getElementById("registroMensaje");
+          mensaje.textContent = "Ocurrió un error en la petición.";
+          mensaje.classList.remove("text-green-600");
+          mensaje.classList.add("text-red-600");
+        }
       });
-    </script>
-  </body>
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      listarAccesos();
+      cargarAmbientes();
+      cargarSistemas();
+      cargarTipoAccesos();
+      cargarUUNN();
+    });
+  </script>
+</body>
+
 </html>

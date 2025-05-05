@@ -26,7 +26,6 @@
                                     <p class="mt-3 fw-bold text-center" style="font-size: 1.2rem; color: #555;">Control de inventario</p>
                                 </div>
 
-
                                 <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                     <div class="card-body p-4 p-lg-5 text-black">
 
@@ -35,7 +34,6 @@
                                             <div class="d-flex align-items-center mb-3 pb-1">
                                                 <img src="https://intercorpretail.pe/images/intercorp_logo.png" alt="Logo" style="height: 40px;">
                                             </div>
-
 
                                             <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Inicia sesión en tu cuenta</h5>
 
@@ -48,6 +46,7 @@
                                                 <input type="password" id="form2Example27" class="form-control form-control-lg" />
                                                 <label class="form-label" for="form2Example27">Contraseña</label>
                                             </div>
+
                                             <!-- Boton login... manda a la pagina index -->
                                             <div class="pt-1 mb-4">
                                                 <button id="btnLogin" class="btn btn-dark btn-lg btn-block" type="button">Iniciar Sesión</button>
@@ -64,32 +63,73 @@
             </div>
         </section>
     </form>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" style="position: fixed; bottom: 20px; right: 20px; z-index: 1050;"></div>
+
     <script>
         document.getElementById('btnLogin').addEventListener('click', () => {
-          const correo = document.getElementById('form2Example17').value;
-          const password = document.getElementById('form2Example27').value;
-      
-          fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ correo, password })
-          })
-          .then(res => res.json())
-          .then(data => {
-            if (data.success) {
-              // Redireccionar si todo está bien
-              window.location.href = "index.html";
-            } else {
-              alert('Usuario o contraseña incorrectos');
-            }
-          })
-          .catch(err => {
-            console.error('Error al conectar con la API:', err);
-            alert('Error de conexión al servidor');
-          });
+            const correo = document.getElementById('form2Example17').value;
+            const password = document.getElementById('form2Example27').value;
+
+            fetch('http://localhost:3000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ correo, password })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Redireccionar si todo está bien
+                    window.location.href = "index.html";
+                } else {
+                    showToast('Usuario o contraseña incorrectos', 'danger');
+                }
+            })
+            .catch(err => {
+                console.error('Error al conectar con la API:', err);
+                showToast('Error de conexión al servidor', 'danger');
+            });
         });
-      </script>
+
+        // Función para mostrar el mensaje flotante (toast)
+        function showToast(message, type) {
+            const toastContainer = document.getElementById('toastContainer');
+
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-white bg-${type} border-0`;
+            toast.style.width = '300px';
+            toast.style.marginBottom = '10px';
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>`;
+
+            toastContainer.appendChild(toast);
+
+            const bootstrapToast = new bootstrap.Toast(toast);
+            bootstrapToast.show();
+
+            // Eliminar el toast después de que se ha mostrado durante 5 segundos
+            setTimeout(() => {
+                toastContainer.removeChild(toast);
+            }, 5000);
+        }
+
+        // Redirigir al presionar Enter en el campo de contraseña o correo
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                document.getElementById('btnLogin').click();
+            }
+        });
+    </script>
 </body>
 </html>

@@ -253,3 +253,5 @@ export const registerUsuario = async (req, res) => {
       .json({ message: "Error al registrar usuario", error: error.message });
   }
 };
+
+// Cerrar sesion por completo
