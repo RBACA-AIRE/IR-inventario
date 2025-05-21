@@ -94,32 +94,30 @@
             </div>
         </div>
         <!-- ==================================Card ========================== -->
-        <!-- Título -->
-        <h1 class="text-2x1 font-semibold text-gray-700">
-            Dashboard
-        </h1>
         <div class="cardBox">
             <div class="card">
                 <div>
-                    <div class="numbers">1,600</div>
-                    <div class="cardName">Inventario Genral</div>
+                    <div class="numbers" id="inventario-general">Cargando...</div>
+                    <div class="cardName">Inventario General</div>
                 </div>
                 <div class="iconBx">
                     <ion-icon name="server-outline"></ion-icon>
                 </div>
             </div>
+
             <div class="card" style="cursor: pointer;" onclick="window.location.href='accesoRemoto.html'">
                 <div>
-                    <div class="numbers">80</div>
+                    <div class="numbers" id="accesos-remotos">Cargando...</div>
                     <div class="cardName">Accesos Remotos</div>
                 </div>
                 <div class="iconBx">
                     <ion-icon name="file-tray-full-outline"></ion-icon>
                 </div>
             </div>
+
             <div class="card" style="cursor: pointer;" onclick="window.location.href='register.html'">
                 <div>
-                    <div class="numbers">1,50</div>
+                    <div class="numbers" id="usuarios-registrados">Cargando...</div>
                     <div class="cardName">Usuarios Registrados</div>
                 </div>
                 <div class="iconBx">
@@ -129,7 +127,7 @@
 
             <div class="card">
                 <div>
-                    <div class="numbers">1,5048</div>
+                    <div class="numbers" id="base-conocimiento">Cargando...</div>
                     <div class="cardName">Base del Conocimiento</div>
                 </div>
                 <div class="iconBx">
@@ -137,6 +135,7 @@
                 </div>
             </div>
         </div>
+
         <!-- ============================ Add Charts JS ===================== -->
         <div class="date">
             <label for="date-input">Selecciona una fecha:</label>
@@ -243,6 +242,19 @@
         </div>
     </div>
     </div>
+    <!-- Chatbot flotante -->
+    <div id="chatbot-container">
+        <div id="chatbot-toggle">
+            <img src="assets/imgs/chatbot.png" alt="Chatbot" />
+        </div>
+        <div id="chatbot-box" class="hidden">
+            <div id="chatbot-header">Chatbot</div>
+            <div id="chatbot-messages"></div>
+            <input type="text" id="chatbot-input" placeholder="Escribe un mensaje..." />
+        </div>
+    </div>
+
+
 
     <!-- ==================== Scripts ========================= -->
     <script src="assets/js/main.js"></script>
@@ -250,6 +262,13 @@
     <!-- =====================Charts JS========================-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
     <script src="assets/js/chartJS.js"></script>
+
+    <!-- =====================Chat BOT========================-->
+    <script src="assets/js/chatbot.js"></script>
+
+    <!-- =====================Dashboard========================-->
+    <script src="assets/js/dashboard.js"></script>
+
 
     <!--==================== ionicons ============= -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

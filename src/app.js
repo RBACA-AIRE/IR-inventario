@@ -8,7 +8,8 @@ import jwt from 'jsonwebtoken';
 import servidoresRoutes from './routes/servidores.routes.js';
 import accesosRoutes from './routes/accesos.routes.js';
 import authRoutes from './routes/auth.routes.js';
-
+import chatbotRoutes from'./routes/chatbot.routes.js';
+import dashboardRoutes from './routes/dashboard.routes.js';
 const app = express();
 
 // Cargar variables de entorno
@@ -28,6 +29,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
+
+// iniciar el uso de chatbot
+app.use('/api/chatbot', chatbotRoutes);
+
+// Después de montar otras rutas API:
+app.use('/api/dashboard', dashboardRoutes);
 
 // Montar rutas API bajo /api/
 app.use('/api/servidores', servidoresRoutes);
