@@ -11,7 +11,6 @@ const respuestasEstaticas = {
 };
 
 export const procesarMensaje = async (req, res) => {
-   console.log("DEBUG - req.body:", req.body);
   // ✅ Validación segura del cuerpo
   const mensaje = req.body?.mensaje;
   if (!mensaje || typeof mensaje !== 'string') {
