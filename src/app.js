@@ -10,6 +10,7 @@ import accesosRoutes from './routes/accesos.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import chatbotRoutes from'./routes/chatbot.routes.js';
 import dashboardRoutes from './routes/dashboard.routes.js';
+import conocimientoRoutes from './routes/conocimiento.routes.js';
 const app = express();
 
 // Cargar variables de entorno
@@ -40,5 +41,6 @@ app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/servidores', servidoresRoutes);
 app.use('/api/accesos', accesosRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/conocimientos', conocimientoRoutes);
 
 export default app;

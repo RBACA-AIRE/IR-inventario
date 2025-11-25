@@ -8,6 +8,8 @@
     <title>Control de Servidores</title>
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- ===================Stilos ========================================= -->
 </head>
@@ -45,11 +47,11 @@
                 <li>
                     <a href="accesoRemoto.html" title="Accesos Remotos">
                         <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                        <span class="title">Accesos Remotos</span>
+                        <span class="title">Gestión de Credenciales</span>
                     </a>
                 </li>
                 <li>
-                    <a href="404-page.html" title="Inventario General">
+                    <a href="inventario.html" title="Inventario General">
                         <span class="icon"><ion-icon name="file-tray-full-outline"></ion-icon></span>
                         <span class="title">Inventario General</span>
                     </a>
@@ -61,7 +63,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/logout" title="Cerrar Sesión">
+                    <a href="#" id="logoutLink" title="Cerrar Sesión">
                         <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
                         <span class="title">Cerrar Sesión</span>
                     </a>
@@ -97,105 +99,169 @@
         </div>
 
         <!--==============================tabla conocimiento==============================-->
-         
-      <div class="container min-w-full px-4 text-base md:text-[20px] lg:text-[22px] xl:text-[21px]">
-  <!-- Barra superior con filtros -->
 
-  <!-- Título -->
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-semibold text-gray-700">
-      Base del Conocimiento
-    </h1>
-  </div>
-        <header class="flex space-x-2 mb-2">
-            <button class="flex items-center space-x-1 border border-gray-300 rounded px-2 py-1 text-blue-600 hover:bg-gray-100" type="button">
-                <i class="fas fa-undo-alt"></i>
-                <span>Manuales</span>
-            </button>
-            <button class="flex items-center space-x-1 border border-gray-300 rounded px-2 py-1 text-blue-600 hover:bg-gray-100" type="button">
-                <i class="fas fa-question-circle"></i>
-                <span>Preguntas</span>
-            </button>
-            <button class="flex items-center space-x-1 border border-gray-300 rounded px-2 py-1 text-blue-600 hover:bg-gray-100" type="button">
-                <i class="fas fa-video"></i>
-                <span>Vídeos</span>
-            </button>
-        </header>
-        <!-- Tabla lateral y área central -->
-        <main class="flex flex-1 overflow-hidden rounded border border-gray-300 bg-white">
-            <aside class="w-[300px] bg-[#edf2f7] p-3 flex flex-col">
-                <label class="mb-1 text-[14px] font-normal text-gray-700" for="tipoContenido">
-                    Seleccione tipo de contenido:
-                </label>
-                <select class="mb-2 w-full rounded border border-gray-300 bg-white px-2 py-1 text-[16px] text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500" id="tipoContenido" name="tipoContenido">
-                    <option>Manuales</option>
-                </select>
-
-                <table class="w-full border-collapse text-[11px]">
-                    <thead>
-                        <tr>
-                            <th class="bg-blue-600 text-white text-[11px] font-bold text-center py-1 select-none cursor-pointer" scope="col">
-                                MÓDULOS
-                                <span class="inline-block align-middle ml-1">▲</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Alternancia de filas para mejor visibilidad -->
-                        <tr class="bg-white"><td class="border-t border-gray-200 px-2 py-[2px] font-semibold">Activo Fijo</td></tr>
-                        <tr class="bg-[#f7f9fc]"><td class="border-t border-gray-200 px-2 py-[10px]">Contabilidad</td></tr>
-                        <tr class="bg-white"><td class="border-t border-gray-200 px-2 py-[10px]">Facturación Electrónica</td></tr>
-                        <tr class="bg-[#f7f9fc]"><td class="border-t border-gray-200 px-2 py-[10px]">Gestión Automotriz</td></tr>
-                        <tr class="bg-white"><td class="border-t border-gray-200 px-2 py-[10px]">Gestión de Almacenes</td></tr>
-                        <tr class="bg-[#f7f9fc]"><td class="border-t border-gray-200 px-2 py-[10px]">Gestión de Clínicas</td></tr>
-                        <tr class="bg-white"><td class="border-t border-gray-200 px-2 py-[10px]">Gestión de Compras</td></tr>
-                        <tr class="bg-[#f7f9fc]"><td class="border-t border-gray-200 px-2 py-[10px]">Gestión de Producción</td></tr>
-                        <tr class="bg-white"><td class="border-t border-gray-200 px-2 py-[10px]">Gestión de Transporte</td></tr>
-                        <tr class="bg-[#f7f9fc]"><td class="border-t border-gray-200 px-2 py-[10px]">Gestión de Ventas</td></tr>
-                        <tr class="bg-white"><td class="border-t border-gray-200 px-2 py-[10px]">Gestión Tributaria</td></tr>
-                        <tr class="bg-[#f7f9fc]"><td class="border-t border-gray-200 px-2 py-[10px]">Maestros</td></tr>
-                        <tr class="bg-white"><td class="border-t border-gray-200 px-2 py-[2px]">Mantenimiento de vehículos</td></tr>
-                        <tr class="bg-[#f7f9fc]"><td class="border-t border-gray-200 px-2 py-[10px]">Planillas</td></tr>
-                        <tr class="bg-white"><td class="border-t border-gray-200 px-2 py-[10px]">Soporte Técnico</td></tr>
-                        <tr class="bg-[#f7f9fc]"><td class="border-t border-gray-200 px-2 py-[10px]">Tesorería</td></tr>
-                    </tbody>
-                </table>
-            </aside>
-
-            <section class="flex-1 flex flex-col justify-center items-center p-6">
-                <p class="text-[23px] font-normal mb-6 select-none">SELECCIONE UN MÓDULO</p>
-                <img src="/assets/imgs/doubletap.gif"
-                     width="250" height="250"
-                     alt="Icono de mano tocando pantalla con círculos concéntricos azules alrededor del dedo índice"
-                     class="select-none">
-            </section>
-        </main>
-    </div>
-
-            <!-- Chatbot flotante -->
-            <div id="chatbot-container">
-                <div id="chatbot-toggle">
-                    <img src="assets/imgs/chatbot.png" alt="Chatbot" />
-                </div>
-                <div id="chatbot-box" class="hidden">
-                    <div id="chatbot-header">Chatbot</div>
-                    <div id="chatbot-messages"></div>
-                    <input type="text" id="chatbot-input" placeholder="Escribe un mensaje..." />
-                </div>
+        <div class="container min-w-full px-4 text-base md:text-[20px] lg:text-[22px] xl:text-[21px]">
+            <!-- Título -->
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-semibold text-gray-700">
+                    Base del Conocimiento
+                </h1>
             </div>
 
+            <!-- Botones de filtro -->
+            <header class="flex space-x-2 mb-2">
+                <button
+                    class="flex items-center space-x-1 border border-gray-300 rounded px-2 py-1 text-blue-600 hover:bg-gray-100"
+                    type="button">
+                    <i class="fas fa-undo-alt"></i>
+                    <span>Instructivos</span>
+                </button>
+                <button
+                    class="flex items-center space-x-1 border border-gray-300 rounded px-2 py-1 text-blue-600 hover:bg-gray-100"
+                    type="button">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Preguntas</span>
+                </button>
+                <button
+                    class="flex items-center space-x-1 border border-gray-300 rounded px-2 py-1 text-blue-600 hover:bg-gray-100"
+                    type="button">
+                    <i class="fas fa-video"></i>
+                    <span>Vídeos</span>
+                </button>
+            </header>
+
+            <!-- Contenedor principal -->
+            <main class="flex flex-1 overflow-hidden rounded border border-gray-300 bg-white">
+
+                <!-- Barra lateral -->
+                <aside class="w-[270px] border-r border-gray-400 bg-[#f9faff] p-3">
+                    <label for="tipoContenido" class="mb-1 text-[14px] font-normal text-gray-700 block">
+                        Seleccione tipo de contenido:
+                    </label>
+                    <select
+                        class="mb-2 w-full rounded border border-gray-300 bg-white px-2 py-1 text-[14px] text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        id="tipoContenido" name="tipoContenido">
+                        <option>Instructivos</option>
+                    </select>
+
+                    <!-- Lista de módulos (dinámica) -->
+                    <div id="modulosContainer">
+                        <div
+                            class="bg-blue-600 text-white text-[13px] font-bold px-2 py-1 select-none flex justify-between items-center">
+                            <span>MÓDULOS</span>
+                            <i class="fas fa-caret-up"></i>
+                        </div>
+                        <ul id="modulosList" class="text-[13px] text-[#111]">
+                            <!-- Módulos serán insertados aquí con JS -->
+                        </ul>
+                    </div>
 
 
-            <!-- ==================== Scripts ========================= -->
-            <script src="assets/js/main.js"></script>
+                </aside>
+
+                <!-- Sección principal -->
+                <section class="flex-1 flex flex-col border-l border-gray-400">
+                    <!-- Encabezado de tabla -->
+                    <div
+                        class="flex items-center justify-between bg-[#3b82f6] text-white text-[13px] font-bold select-none">
+                        <div class="flex-1 px-3 py-2 border-r border-[#5a8de0] uppercase">
+                            DESCRIPCIÓN
+                            <i class="fas fa-caret-up ml-1"></i>
+                        </div>
+                        <div class="w-[80px] text-center py-2 border-l border-[#5a8de0] uppercase">
+                            VER
+                        </div>
+                    </div>
+
+                    <!-- Registros -->
+                    <div id="manualesList" class="divide-y divide-gray-300">
+                        <div class="text-center py-4">
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="text-[20px] text-[#111] mb-2 font-semibold">SELECCIONE MÓDULO</div>
+                                <img src="assets/imgs/doubletap.gif" alt="Icono de mano tocando pantalla" width="250"
+                                    height="250" class="select-none" />
+                            </div>
+                        </div>
+                    </div>
 
 
-            <!-- =====================Chat BOT========================-->
-            <script src="assets/js/chatbot.js"></script>
 
-            <!--==================== ionicons ============= -->
-            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+                    <!-- Texto de registros -->
+
+                    <!-- Paginación -->
+                    <div class="flex items-center justify-end gap-2 px-3 py-2 text-[13px] text-[#666]">
+                        <span>Anterior</span>
+                        <button type="button" class="border border-gray-300 rounded px-3 py-1 bg-white text-[#333]">
+                            1
+                        </button>
+                        <span>Siguiente</span>
+                    </div>
+                </section>
+            </main>
+        </div>
+        <!-- Chatbot flotante -->
+        <div id="chatbot-container">
+            <div id="chatbot-toggle">
+                <img src="assets/imgs/chatbot.png" alt="Chatbot" />
+            </div>
+            <div id="chatbot-box" class="hidden">
+                <div id="chatbot-header">Chatbot</div>
+                <div id="chatbot-messages"></div>
+                <input type="text" id="chatbot-input" placeholder="Escribe un mensaje..." />
+            </div>
+        </div>
+
+
+
+        <!-- ==================== Scripts ========================= -->
+        <script src="assets/js/main.js"></script>
+
+
+        <!-- =====================Chat BOT========================-->
+        <script src="assets/js/chatbot.js"></script>
+
+        <!--==================== Script para manejar el logout ============= -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const logoutLink = document.getElementById('logoutLink');
+
+                if (logoutLink) {
+                    logoutLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        // Mostrar mensaje de confirmación
+                        if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                            // Hacer logout mediante fetch API
+                            fetch('/logout', {
+                                method: 'POST',
+                                credentials: 'include' // importante para incluir cookies
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        window.location.href = data.redirect || '/login';
+                                    } else {
+                                        alert('Error al cerrar sesión: ' + data.message);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error al cerrar sesión:', error);
+                                    // Redirigir al login incluso si hay error
+                                    window.location.href = '/login';
+                                });
+                        }
+                    });
+                }
+            });
+        </script>
+
+        <!--==================== ionicons ============= -->
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+        <!--==================== modulos dinamicos de conocimineto ============= -->
+        <script src="assets/js/conocimiento.js"></script>
+
 
 </body>
 

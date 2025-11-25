@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control de Servidores</title>
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .dt-search {
+      display: none;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navegación -->
+  <div class="container">
+    <div class="navigation">
+      <ul>
+        <li>
+          <a href="index.html" class="icon-link" title="Intercorp Retail">
+            <img src="assets/imgs/intercorp-azul.ico" alt="Icono" class="icono" />
+            <span class="title">Intercorp Retail</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.html" title="Dashboard">
+            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+            <span class="title">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="404-page.html" title="Gestión del Negocio">
+            <span class="icon"><ion-icon name="business-outline"></ion-icon></span>
+            <span class="title">Gestión del Negocio</span>
+          </a>
+        </li>
+        <li>
+          <a href="register.html" title="Gestión de Usuarios">
+            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+            <span class="title">Gestión de Usuarios</span>
+          </a>
+        </li>
+        <li>
+          <a href="accesoRemoto.html" title="Accesos Remotos">
+            <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
+            <span class="title">Gestión de Credenciales</span>
+          </a>
+        </li>
+        <li>
+          <a href="404-page.html" title="Inventario General">
+            <span class="icon"><ion-icon name="file-tray-full-outline"></ion-icon></span>
+            <span class="title">Inventario General</span>
+          </a>
+        </li>
+        <li>
+          <a href="conocimiento.html" title="Base del Conocimiento">
+            <span class="icon"><ion-icon name="archive-outline"></ion-icon></span>
+            <span class="title">Base del Conocimiento</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" id="logoutLink" title="Cerrar Sesión">
+            <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
+            <span class="title">Cerrar Sesión</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <div class="toggle">
+        <ion-icon name="menu-outline"></ion-icon>
+      </div>
+      <div class="user">
+        <img src="assets/imgs/customer01.jpg" alt="Usuario" />
+      </div>
+    </div>
+
+    <!-- Tabla de registro -->
+    <div class="container min-w-full p-4">
+      <!-- Barra superior con filtros -->
+      <div class="flex justify-between items-center mb-6">
+        <!-- Título -->
+        <h1 class="text-2xl font-semibold text-gray-700">
+          Inventario General
+        </h1>
+        <div class="flex space-x-2">
+          <input type="text" id="nombre" class="border border-gray-300 rounded px-4 py-2" placeholder="Nombres" />
+          <input type="text" id="correo" class="border border-gray-300 rounded px-4 py-2" placeholder="Correo" />
+          <button id="searchButton" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+            Buscar
+          </button>
+          <button id="addButton" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+            Añadir Nuevo
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabla -->
+
+      <body class="bg-white text-black font-sans">
+        <div class="p-4 overflow-x-auto scrollbar-hide">
+          <div class="flex items-center gap-2 mb-4 flex-wrap">
+            <button
+              class="flex items-center gap-1 bg-gray-400 text-white text-xs font-semibold rounded px-3 py-2 cursor-pointer select-none"
+              type="button">
+              Actions
+              <i class="fas fa-caret-down text-xs"></i>
+            </button>
+            <div class="flex-grow"></div>
+            </button>
+            <button class="text-purple-600 text-xs font-semibold cursor-pointer select-none" type="button">
+              Export
+            </button>
+          </div>
+          <div class="w-full overflow-x-auto">
+            <div class="overflow-x-auto">
+              <table class="min-w-full bg-white border border-gray-300 text-sm text-left text-gray-700">
+                <thead>
+                  <tr class="bg-gray-100 text-gray-800">
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle" rowspan="2">Hostname</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle" rowspan="2">IP</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle" colspan="2">Data Center</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle" colspan="3">Capacidades</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle" rowspan="2">Dominio</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle" rowspan="2">Ambiente</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle" rowspan="2">Funcional</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle" rowspan="2">App Negocio</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle" rowspan="2">Det. Negocio</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle" rowspan="2">Estado</th>
+                  </tr>
+                  <tr class="bg-gray-100 text-gray-800">
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle">Entel</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle">Kyndryl</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle">RAM</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle">Core</th>
+                    <th class="py-2 px-4 border border-gray-300 text-center align-middle">SSD/HDD</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Aquí van las filas dinámicas -->
+                </tbody>
+              </table>
+            </div>
+            <!-- ============================ lista de detalles del Registro ===================== -->
+          </div>
+
+          <!-- Modal de Registro -->
+          <div id="registroModal"
+            class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center hidden">
+            <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl relative overflow-y-auto max-h-screen">
+              <h2 class="text-2xl font-semibold mb-4">Registro General del Servidor</h2>
+              <form id="registroForm">
+                <!-- Datos generales -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                  <input type="text" name="hostname" placeholder="Hostname" class="border px-4 py-2 rounded" required />
+                  <input type="text" name="ip" placeholder="IP" class="border px-4 py-2 rounded" required />
+                  <input type="text" name="SistemaOperativo" placeholder="Sistema O." class="border px-4 py-2 rounded"
+                    required />
+                  <select id="id_sistema" name="id_sistema" class="border px-4 py-2 rounded" required>
+                    <option value="">Seleccionar Data Center</option>
+                  </select>
+                  <select id="id_uunn" name="id_uunn" class="border px-4 py-2 rounded" required>
+                    <option value="">Seleccionar Dominio</option>
+                  </select>
+                  <select id="id_ambiente" name="id_ambiente" class="border px-4 py-2 rounded" required>
+                    <option value="">Seleccionar Ambiente</option>
+                  </select>
+                  <select name="estado" class="border px-4 py-2 rounded" required>
+                    <option value="">Seleccionar Estado</option>
+                    <option value="1">Encendido</option>
+                    <option value="0">Apagado</option>
+                  </select>
+                </div>
+
+                <!-- Capacidades del servidor -->
+                <h3 class="text-lg font-semibold mb-2">Capacidades del Servidor:</h3>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                  <input type="text" name="ram" placeholder="RAM (GB)" class="border px-4 py-2 rounded" />
+                  <input type="text" name="cores" placeholder="Núcleos (Cores)" class="border px-4 py-2 rounded" />
+                  <input type="text" name="disco" placeholder="Disco (SSD/HDD)" class="border px-4 py-2 rounded" />
+                </div>
+
+                <!-- Funcional del servidor -->
+                <h3 class="text-lg font-semibold mb-2">Funcional del Servidor:</h3>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                  <div class="flex flex-col col-span-2">
+                    <input type="text" id="funcional" name="funcional" placeholder="Nombre del Funcional"
+                      class="border px-4 py-2 rounded w-full" />
+                  </div>
+                  <!--<div class="flex flex-col col-span-2">
+                    <input type="text" id="gerencia" name="gerencia" placeholder="Nombre de Gerencia"
+                      class="border px-4 py-2 rounded w-full" />
+                  </div> -->
+                </div>
+
+                <!-- Tipo de infra del servidor -->
+                <h3 class="text-lg font-semibold mb-2">Tipo de Infraestructura:</h3>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                  <!-- Tipo de Infraestructura -->
+                  <div class="flex flex-col col-span-1">
+                    <label for="id_sistema" class="mb-1 text-sm font-medium text-gray-700">Infraestructura</label>
+                    <select id="id_sistema" name="id_sistema" class="border px-4 py-2 rounded" required>
+                      <option value="">Seleccionar Infra.</option>
+                    </select>
+                  </div>
+
+                  <!-- Sistema Operativo -->
+                  <div class="flex flex-col col-span-1">
+                    <label for="so" class="mb-1 text-sm font-medium text-gray-700">Sistema Operativo</label>
+                    <input type="text" id="so" name="so" placeholder="Ej. Windows Server"
+                      class="border px-4 py-2 rounded w-full" />
+                  </div>
+
+                  <!-- Versión del S.O. -->
+                  <div class="flex flex-col col-span-1">
+                    <label for="version_so" class="mb-1 text-sm font-medium text-gray-700">Versión del S.O.</label>
+                    <input type="text" id="version_so" name="version_so" placeholder="Ej. 2019"
+                      class="border px-4 py-2 rounded w-full" />
+                  </div>
+                </div>
+
+                                <!-- Aquí puedes seguir con botones o más contenido -->
+              </form>
+            </div>
+          </div>
+
+
+          <!-- Scripts -->
+          <script>
+            document.getElementById('id_rol').addEventListener('change', function () {
+              const rol = this.value;
+              const rolOptions = document.getElementById('rolOptions');
+              const adminOptions = document.getElementById('adminOptions');
+              const usuarioOptions = document.getElementById('usuarioOptions');
+              const gerenteOptions = document.getElementById('gerenteOptions');
+              const privilegiosTitulo = document.getElementById('privilegiosTitulo');
+
+              // Ocultar todo por defecto
+              rolOptions.classList.add('hidden');
+              privilegiosTitulo.classList.add('hidden');
+              adminOptions.classList.add('hidden');
+              usuarioOptions.classList.add('hidden');
+              gerenteOptions.classList.add('hidden');
+
+              // Si el rol es válido, mostrar secciones correspondientes
+              if (rol === '1' || rol === '2' || rol === '3') {
+                rolOptions.classList.remove('hidden');
+                privilegiosTitulo.classList.remove('hidden');
+
+                if (rol === '1') {
+                  adminOptions.classList.remove('hidden');
+                } else if (rol === '2') {
+                  usuarioOptions.classList.remove('hidden');
+                } else if (rol === '3') {
+                  gerenteOptions.classList.remove('hidden');
+                }
+              }
+            });
+          </script>
+
+          <script src="assets/js/main.js"></script>
+
+          <!-- Iconos -->
+          <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+          <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+          <!-- jQuery y DataTables -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+          <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+
+          <script>
+            // Inicialización de DataTable
+            let TABLA = $("#myTable").DataTable({
+              columnDefs: [{ className: "text-center", targets: "_all" }],
+            });
+
+            // Filtros de búsqueda
+            document.querySelector("#nombre").addEventListener("input", function () {
+              if (!this.value.length) {
+                TABLA.search("").columns().search("").draw();
+              }
+            });
+
+            document.querySelector("#correo").addEventListener("input", function () {
+              if (!this.value.length) {
+                TABLA.search("").columns().search("").draw();
+              }
+            });
+
+            document
+              .querySelector("#searchButton")
+              .addEventListener("click", function () {
+                let nombre = document.querySelector("#nombre");
+                let correo = document.querySelector("#correo");
+
+                TABLA.column(1, true, false, true)
+                  .search(nombre.value || "")
+                  .draw();
+                TABLA.column(5, true, false, true)
+                  .search(correo.value || "")
+                  .draw();
+              });
+
+            // Manejo del modal
+            function openModal() {
+              document.getElementById("registroModal").classList.remove("hidden");
+              cargarRoles();
+            }
+
+            function closeModal() {
+              document.getElementById("registroModal").classList.add("hidden");
+              document.getElementById("registroForm").reset();
+              document.getElementById("registroMensaje").textContent = "";
+            }
+
+            document.getElementById("addButton").addEventListener("click", openModal);
+            document
+              .getElementById("closeModal")
+              .addEventListener("click", closeModal);
+            document
+              .getElementById("cancelButton")
+              .addEventListener("click", closeModal);
+
+            // Cerrar modal haciendo clic fuera
+            window.addEventListener("click", function (e) {
+              if (e.target === document.getElementById("registroModal")) {
+                closeModal();
+              }
+            });
+
+            // Cargar roles desde el backend
+            async function cargarRoles() {
+              try {
+                const response = await fetch("/api/auth/roles");
+                const roles = await response.json();
+
+                const selectRol = document.getElementById("id_rol");
+                selectRol.innerHTML = '<option value="">Seleccionar Rol</option>';
+
+                if (Array.isArray(roles)) {
+                  roles.forEach((rol) => {
+                    const option = document.createElement("option");
+                    option.value = rol.id_rol || rol.id;
+                    option.textContent = rol.nombre || rol.nombre_rol;
+                    selectRol.appendChild(option);
+                  });
+                } else {
+                  console.error("Los roles no son una lista válida", roles);
+                }
+              } catch (error) {
+                console.error("Error al cargar los roles:", error);
+              }
+            }
+
+            // Cargar áreas desde el backend
+            async function cargarAreas() {
+              try {
+                const response = await fetch("/api/auth/areas");
+                const areas = await response.json();
+
+                const selectArea = document.getElementById("id_area");
+                selectArea.innerHTML = '<option value="">Seleccionar Área</option>';
+
+                if (Array.isArray(areas)) {
+                  areas.forEach((area) => {
+                    const option = document.createElement("option");
+                    option.value = area.id_area;
+                    option.textContent = area.nombre_area;
+                    selectArea.appendChild(option);
+                  });
+                } else {
+                  console.error("Las áreas no son una lista válida", areas);
+                }
+              } catch (error) {
+                console.error("Error al cargar las áreas:", error);
+              }
+            }
+
+            // Cargar cargos desde el backend
+            async function cargarCargos() {
+              try {
+                const response = await fetch("/api/auth/cargos");
+                const cargos = await response.json();
+
+                const selectCargo = document.getElementById("id_cargo");
+                selectCargo.innerHTML = '<option value="">Seleccionar Cargo</option>';
+
+                if (Array.isArray(cargos)) {
+                  cargos.forEach((cargo) => {
+                    const option = document.createElement("option");
+                    option.value = cargo.id_cargo;
+                    option.textContent = cargo.nombre_cargo;
+                    selectCargo.appendChild(option);
+                  });
+                } else {
+                  console.error("Los cargos no son una lista válida", cargos);
+                }
+              } catch (error) {
+                console.error("Error al cargar los cargos:", error);
+              }
+            }
+
+            // Listar usuarios
+            async function listarUsuarios() {
+              try {
+                const response = await fetch("/api/auth/usuario");
+                if (!response.ok)
+                  throw new Error("No se pudo obtener la lista de usuarios");
+
+                const usuarios = await response.json();
+
+                // Limpiar tabla antes de añadir nuevos datos
+                TABLA.clear();
+
+                if (usuarios && Array.isArray(usuarios)) {
+                  usuarios.forEach((usuario) => {
+                    TABLA.row.add([
+                      usuario.id_usuario,
+                      usuario.nombre_completo,
+                      usuario.username,
+                      usuario.nombre_area,
+                      usuario.nombre_cargo,
+                      usuario.correo,
+                      usuario.celular,
+                      usuario.nombre,
+                      usuario.estado_app == 1 ? "Activo" : "Inactivo",
+                      `<div style="display: flex; justify-content: center; align-items: center;">
+              <button class="editBtn" title="Editar" onclick="editarUsuario(${usuario.id_usuario})">
+                <svg height="1em" viewBox="0 0 512 512">
+                <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 
+                89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 
+                480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 
+                27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 
+                452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 
+                33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 
+                14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 
+                0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 
+                16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                </svg></button></div>`,
+                    ]);
+                  });
+                  TABLA.draw();
+                } else {
+                  console.error("Los usuarios no son una lista válida", usuarios);
+                }
+              } catch (error) {
+                console.error("Error al cargar los usuarios:", error);
+              }
+            }
+
+            // Función para editar usuario (stub para mantener la funcionalidad)
+            function editarUsuario(id) {
+              console.log(`Editar usuario con ID: ${id}`);
+              // Implementar lógica de edición según sea necesario
+            }
+
+            // Manejar el envío del formulario
+            document
+              .getElementById("registroForm")
+              .addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+
+                const data = {
+                  nombre_completo: formData.get("nombre").trim(),
+                  username: formData.get("username").trim(),
+                  correo: formData.get("correo").trim(),
+                  celular: formData.get("celular").trim(),
+                  password: formData.get("password").trim(),
+                  id_rol: parseInt(formData.get("id_rol")),
+                  id_area: parseInt(formData.get("id_area")),
+                  id_cargo: parseInt(formData.get("id_cargo")),
+                  estado_app: formData.get("estado") === "1" ? 1 : 0,
+                };
+
+                // Validación para asegurarse de que todos los campos estén llenos
+                if (
+                  !data.nombre_completo ||
+                  !data.username ||
+                  !data.correo ||
+                  !data.celular ||
+                  !data.password ||
+                  !data.id_rol ||
+                  !data.id_area ||
+                  !data.id_cargo ||
+                  !data.estado_app
+                ) {
+                  document.getElementById("registroMensaje").textContent =
+                    "Todos los campos son obligatorios.";
+                  document
+                    .getElementById("registroMensaje")
+                    .classList.add("text-red-600");
+                  return;
+                }
+
+                try {
+                  const response = await fetch("/api/auth/registerUsuario", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                  });
+
+                  const result = await response.json();
+                  const mensaje = document.getElementById("registroMensaje");
+
+                  if (response.ok) {
+                    mensaje.textContent = "Usuario registrado correctamente";
+                    mensaje.classList.remove("text-red-600");
+                    mensaje.classList.add("text-green-600");
+                    this.reset();
+
+                    // Actualizar la lista de usuarios
+                    listarUsuarios();
+
+                    setTimeout(() => {
+                      closeModal();
+                    }, 2000);
+                  } else {
+                    mensaje.textContent =
+                      result.message || "Error al registrar usuario";
+                    mensaje.classList.remove("text-green-600");
+                    mensaje.classList.add("text-red-600");
+                  }
+                } catch (error) {
+                  console.error("Error en el registro:", error);
+                  document.getElementById("registroMensaje").textContent =
+                    "Error de conexión";
+                  document
+                    .getElementById("registroMensaje")
+                    .classList.add("text-red-600");
+                }
+              });
+
+            // Inicializar la página
+            document.addEventListener("DOMContentLoaded", function () {
+              listarUsuarios();
+              cargarAreas();
+              cargarCargos();
+            });
+          </script>  <!--==================== Script para manejar el logout ============= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutLink = document.getElementById('logoutLink');
+            
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Mostrar mensaje de confirmación
+                    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                        // Hacer logout mediante fetch API
+                        fetch('/logout', {
+                            method: 'POST',
+                            credentials: 'include' // importante para incluir cookies
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = data.redirect || '/login';
+                            } else {
+                                alert('Error al cerrar sesión: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error al cerrar sesión:', error);
+                            // Redirigir al login incluso si hay error
+                            window.location.href = '/login';
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+      </body>
+
+</html>

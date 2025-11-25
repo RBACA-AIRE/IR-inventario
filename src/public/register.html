@@ -52,7 +52,7 @@
         <li>
           <a href="accesoRemoto.html" title="Accesos Remotos">
             <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-            <span class="title">Accesos Remotos</span>
+            <span class="title">Gestión de Credenciales</span>
           </a>
         </li>
         <li>
@@ -68,7 +68,7 @@
           </a>
         </li>
         <li>
-          <a href="#" title="Cerrar Sesión">
+          <a href="#" id="logoutLink" title="Cerrar Sesión">
             <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
             <span class="title">Cerrar Sesión</span>
           </a>
@@ -235,34 +235,34 @@
   <!-- Scripts -->
   <script>
     document.getElementById('id_rol').addEventListener('change', function () {
-    const rol = this.value;
-    const rolOptions = document.getElementById('rolOptions');
-    const adminOptions = document.getElementById('adminOptions');
-    const usuarioOptions = document.getElementById('usuarioOptions');
-    const gerenteOptions = document.getElementById('gerenteOptions');
-    const privilegiosTitulo = document.getElementById('privilegiosTitulo');
+      const rol = this.value;
+      const rolOptions = document.getElementById('rolOptions');
+      const adminOptions = document.getElementById('adminOptions');
+      const usuarioOptions = document.getElementById('usuarioOptions');
+      const gerenteOptions = document.getElementById('gerenteOptions');
+      const privilegiosTitulo = document.getElementById('privilegiosTitulo');
 
-    // Ocultar todo por defecto
-    rolOptions.classList.add('hidden');
-    privilegiosTitulo.classList.add('hidden');
-    adminOptions.classList.add('hidden');
-    usuarioOptions.classList.add('hidden');
-    gerenteOptions.classList.add('hidden');
+      // Ocultar todo por defecto
+      rolOptions.classList.add('hidden');
+      privilegiosTitulo.classList.add('hidden');
+      adminOptions.classList.add('hidden');
+      usuarioOptions.classList.add('hidden');
+      gerenteOptions.classList.add('hidden');
 
-    // Si el rol es válido, mostrar secciones correspondientes
-    if (rol === '1' || rol === '2' || rol === '3') {
-      rolOptions.classList.remove('hidden');
-      privilegiosTitulo.classList.remove('hidden');
+      // Si el rol es válido, mostrar secciones correspondientes
+      if (rol === '1' || rol === '2' || rol === '3') {
+        rolOptions.classList.remove('hidden');
+        privilegiosTitulo.classList.remove('hidden');
 
-      if (rol === '1') {
-        adminOptions.classList.remove('hidden');
-      } else if (rol === '2') {
-        usuarioOptions.classList.remove('hidden');
-      } else if (rol === '3') {
-        gerenteOptions.classList.remove('hidden');
+        if (rol === '1') {
+          adminOptions.classList.remove('hidden');
+        } else if (rol === '2') {
+          usuarioOptions.classList.remove('hidden');
+        } else if (rol === '3') {
+          gerenteOptions.classList.remove('hidden');
+        }
       }
-    }
-  });
+    });
   </script>
 
   <script src="assets/js/main.js"></script>
@@ -548,6 +548,42 @@
       cargarCargos();
     });
   </script>
+
+   <!--==================== Script para manejar el logout ============= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutLink = document.getElementById('logoutLink');
+            
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Mostrar mensaje de confirmación
+                    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                        // Hacer logout mediante fetch API
+                        fetch('/logout', {
+                            method: 'POST',
+                            credentials: 'include' // importante para incluir cookies
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = data.redirect || '/login';
+                            } else {
+                                alert('Error al cerrar sesión: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error al cerrar sesión:', error);
+                            // Redirigir al login incluso si hay error
+                            window.location.href = '/login';
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>

@@ -254,4 +254,59 @@ export const registerUsuario = async (req, res) => {
   }
 };
 
-// Cerrar sesion por completo
+// Obtener últimos 5 usuarios registrados
+export const obtenerUltimosUsuarios = async (req, res) => {
+  try {
+    const pool = await sql.connect(process.env.DB_CONNECTION_STRING);
+
+    const result = await pool
+      .request()
+      .query(
+        "SELECT TOP 5 id_usuario, nombre_completo, username, correo, celular, Rol.nombre, Area.nombre_area, Cargo.nombre_cargo, estado_app FROM Usuario JOIN Rol ON Rol.id_rol = Usuario.id_rol JOIN Area ON Area.id_area = Usuario.id_area JOIN Cargo ON Cargo.id_cargo = Usuario.id_cargo ORDER BY id_usuario DESC"
+      );
+
+    if (result.recordset.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No se encontraron usuarios" });
+    }
+
+    return res.status(200).json(result.recordset);
+  } catch (error) {
+    console.error("Error al obtener últimos usuarios:", error);
+    return res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error al obtener últimos usuarios",
+        error: error.message,
+      });
+  }
+};
+
+// Enpoint para Cerrar sesion por completo
+
+export const logoutUsuario = async (req, res) => {
+  try {
+    // Eliminar la cookie 'token' estableciendo una fecha de expiración pasada
+    res.cookie("token", "", {
+      expires: new Date(0), // Fecha en el pasado (inmediatamente expira)
+      httpOnly: true,
+      path: "/",
+    });
+
+    // Responder con éxito
+    return res.status(200).json({
+      success: true,
+      message: "Sesión cerrada correctamente",
+      redirect: "/login",
+    });
+  } catch (error) {
+    console.error("Error en logout:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error al cerrar sesión",
+      error: error.message,
+    });
+  }
+};

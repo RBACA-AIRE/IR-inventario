@@ -53,11 +53,11 @@
         <li>
           <a href="accesoRemoto.html" title="Accesos Remotos">
             <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-            <span class="title">Accesos Remotos</span>
+            <span class="title">Gestión de Credenciales</span>
           </a>
         </li>
         <li>
-          <a href="404-page.html" title="Inventario General">
+          <a href="inventario.html" title="Inventario General">
             <span class="icon"><ion-icon name="file-tray-full-outline"></ion-icon></span>
             <span class="title">Inventario General</span>
           </a>
@@ -69,7 +69,7 @@
           </a>
         </li>
         <li>
-          <a href="" title="Cerrar Sesión">
+          <a href="#" id="logoutLink" title="Cerrar Sesión">
             <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
             <span class="title">Cerrar Sesión</span>
           </a>
@@ -95,7 +95,7 @@
       <!-- Barra superior con filtros -->
       <div class="flex justify-between items-center mb-6">
         <!-- Título -->
-        <h1 class="text-2xl font-semibold text-gray-700">Accesos Remotos</h1>
+        <h1 class="text-2xl font-semibold text-gray-700">Gestión de Credenciales</h1>
         <button class="text-blue-500 text-2xl"></button>
         <div class="flex space-x-2">
           <input type="text" id="Hostname" class="border border-gray-300 rounded px-4 py-2" placeholder="Hostname" />
@@ -601,6 +601,41 @@
       cargarUUNN();
     });
   </script>
+
+  <!--==================== Script para manejar el logout ============= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutLink = document.getElementById('logoutLink');
+            
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Mostrar mensaje de confirmación
+                    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                        // Hacer logout mediante fetch API
+                        fetch('/logout', {
+                            method: 'POST',
+                            credentials: 'include' // importante para incluir cookies
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = data.redirect || '/login';
+                            } else {
+                                alert('Error al cerrar sesión: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error al cerrar sesión:', error);
+                            // Redirigir al login incluso si hay error
+                            window.location.href = '/login';
+                        });
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

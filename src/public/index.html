@@ -43,11 +43,11 @@
                 <li>
                     <a href="accesoRemoto.html" title="Accesos Remotos">
                         <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                        <span class="title">Accesos Remotos</span>
+                        <span class="title">Gestión de Credenciales</span>
                     </a>
                 </li>
                 <li>
-                    <a href="404-page.html" title="Inventario General">
+                    <a href="inventario.html" title="Inventario General">
                         <span class="icon"><ion-icon name="file-tray-full-outline"></ion-icon></span>
                         <span class="title">Inventario General</span>
                     </a>
@@ -59,7 +59,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/logout" title="Cerrar Sesión">
+                    <a href="#" id="logoutLink" title="Cerrar Sesión">
                         <span class="icon"><ion-icon name="exit-outline"></ion-icon></span>
                         <span class="title">Cerrar Sesión</span>
                     </a>
@@ -199,44 +199,10 @@
             <div class="recentUsuarios">
                 <div class="cardHeader">
                     <h2>Nuevos Usuarios</h2>
-                    <a href="#" class="btn">Mostrar Todo</a>
+                    <a href="register.html" class="btn">Mostrar Todo</a>
                 </div>
-                <table>
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
+                <table id="tablaNuevosUsuarios">
+                    <!-- Los datos se cargarán dinámicamente -->
                 </table>
             </div>
         </div>
@@ -269,10 +235,99 @@
     <!-- =====================Dashboard========================-->
     <script src="assets/js/dashboard.js"></script>
 
+    <!--==================== Script para manejar el logout ============= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoutLink = document.getElementById('logoutLink');
+
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Mostrar mensaje de confirmación
+                    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                        // Hacer logout mediante fetch API
+                        fetch('/logout', {
+                            method: 'POST',
+                            credentials: 'include' // importante para incluir cookies
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    window.location.href = data.redirect || '/login';
+                                } else {
+                                    alert('Error al cerrar sesión: ' + data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error al cerrar sesión:', error);
+                                // Redirigir al login incluso si hay error
+                                window.location.href = '/login';
+                            });
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!--==================== Cargar los ultimos 5 registros ============= -->
+    <script>
+        // Función para cargar los últimos 5 usuarios registrados
+        async function cargarUltimosUsuarios() {
+            try {
+                const response = await fetch('/api/auth/ultimos-usuarios');
+                if (!response.ok) {
+                    throw new Error('No se pudo obtener la lista de usuarios');
+                }
+
+                const usuarios = await response.json();
+
+                const tabla = document.getElementById('tablaNuevosUsuarios');
+                tabla.innerHTML = ''; // Limpiar tabla
+
+                if (usuarios.length === 0) {
+                    tabla.innerHTML = '<tr><td colspan="2" style="text-align: center; padding: 10px;">No hay usuarios registrados</td></tr>';
+                    return;
+                }
+
+                // Crear filas para cada usuario
+                usuarios.forEach(usuario => {
+                    const fila = document.createElement('tr');
+
+                    // Usar una imagen por defecto o la imagen del usuario si existe
+                    // Nota: Tu API actual no devuelve un campo 'imagen', así que siempre usaremos la por defecto
+                    const imagenUrl = 'assets/imgs/customer01.jpg';
+
+                    fila.innerHTML = `
+                    <td width="60px">
+                        <div class="imgBx"><img src="${imagenUrl}" alt="${usuario.nombre_completo}"></div>
+                    </td>
+                    <td>
+                        <h4>${usuario.nombre_completo} <br> <span>${usuario.nombre_area || 'Sin área'}</span></h4>
+                    </td>
+                `;
+
+                    tabla.appendChild(fila);
+                });
+            } catch (error) {
+                console.error('Error al cargar los últimos usuarios:', error);
+                document.getElementById('tablaNuevosUsuarios').innerHTML =
+                    '<tr><td colspan="2" style="text-align: center; padding: 10px;">Error al cargar usuarios</td></tr>';
+            }
+        }
+
+        // Ejecutar cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', cargarUltimosUsuarios);
+    </script>
+
+
+
 
     <!--==================== ionicons ============= -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
 
 </body>
 
